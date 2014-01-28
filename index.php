@@ -20,6 +20,5 @@ $code_url = $o->getAuthorizeURL( WB_CALLBACK_URL );
 <body>
 
     <p><a href="<?=$code_url?>"><img src="weibo_login.png" title="ç‚¹å‡»è¿›å…¥æŽˆæ�ƒé¡µé�¢" alt="ç‚¹å‡»è¿›å…¥æŽˆæ�ƒé¡µé�¢" border="0" /></a></p>
-
 </body>
 </html>

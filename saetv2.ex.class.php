@@ -14,9 +14,9 @@ class OAuthException extends Exception {
 
 
 /**
- * 新浪微博 OAuth 认证类(OAuth2)
+ * æ–°æµªå¾®å�š OAuth è®¤è¯�ç±»(OAuth2)
  *
- * 授权机制说明请大家参考微博开放平台文档：{@link http://open.weibo.com/wiki/Oauth2}
+ * æŽˆæ�ƒæœºåˆ¶è¯´æ˜Žè¯·å¤§å®¶å�‚è€ƒå¾®å�šå¼€æ”¾å¹³å�°æ–‡æ¡£ï¼š{@link http://open.weibo.com/wiki/Oauth2}
  *
  * @package sae
  * @author Elmer Zhang
@@ -136,21 +136,21 @@ class SaeTOAuthV2 {
 	}
 
 	/**
-	 * authorize接口
+	 * authorizeæŽ¥å�£
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/Oauth2/authorize Oauth2/authorize}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/Oauth2/authorize Oauth2/authorize}
 	 *
-	 * @param string $url 授权后的回调地址,站外应用需与回调地址一致,站内应用需要填写canvas page的地址
-	 * @param string $response_type 支持的值包括 code 和token 默认值为code
-	 * @param string $state 用于保持请求和回调的状态。在回调时,会在Query Parameter中回传该参数
-	 * @param string $display 授权页面类型 可选范围: 
-	 *  - default		默认授权页面		
-	 *  - mobile		支持html5的手机		
-	 *  - popup			弹窗授权页		
-	 *  - wap1.2		wap1.2页面		
-	 *  - wap2.0		wap2.0页面		
-	 *  - js			js-sdk 专用 授权页面是弹窗，返回结果为js-sdk回掉函数		
-	 *  - apponweibo	站内应用专用,站内应用不传display参数,并且response_type为token时,默认使用改display.授权后不会返回access_token，只是输出js刷新站内应用父框架
+	 * @param string $url æŽˆæ�ƒå�Žçš„å›žè°ƒåœ°å�€,ç«™å¤–åº”ç”¨éœ€ä¸Žå›žè°ƒåœ°å�€ä¸€è‡´,ç«™å†…åº”ç”¨éœ€è¦�å¡«å†™canvas pageçš„åœ°å�€
+	 * @param string $response_type æ”¯æŒ�çš„å€¼åŒ…æ‹¬ code å’Œtoken é»˜è®¤å€¼ä¸ºcode
+	 * @param string $state ç”¨äºŽä¿�æŒ�è¯·æ±‚å’Œå›žè°ƒçš„çŠ¶æ€�ã€‚åœ¨å›žè°ƒæ—¶,ä¼šåœ¨Query Parameterä¸­å›žä¼ è¯¥å�‚æ•°
+	 * @param string $display æŽˆæ�ƒé¡µé�¢ç±»åž‹ å�¯é€‰èŒƒå›´: 
+	 *  - default		é»˜è®¤æŽˆæ�ƒé¡µé�¢		
+	 *  - mobile		æ”¯æŒ�html5çš„æ‰‹æœº		
+	 *  - popup			å¼¹çª—æŽˆæ�ƒé¡µ		
+	 *  - wap1.2		wap1.2é¡µé�¢		
+	 *  - wap2.0		wap2.0é¡µé�¢		
+	 *  - js			js-sdk ä¸“ç”¨ æŽˆæ�ƒé¡µé�¢æ˜¯å¼¹çª—ï¼Œè¿”å›žç»“æžœä¸ºjs-sdkå›žæŽ‰å‡½æ•°		
+	 *  - apponweibo	ç«™å†…åº”ç”¨ä¸“ç”¨,ç«™å†…åº”ç”¨ä¸�ä¼ displayå�‚æ•°,å¹¶ä¸”response_typeä¸ºtokenæ—¶,é»˜è®¤ä½¿ç”¨æ”¹display.æŽˆæ�ƒå�Žä¸�ä¼šè¿”å›žaccess_tokenï¼Œå�ªæ˜¯è¾“å‡ºjsåˆ·æ–°ç«™å†…åº”ç”¨çˆ¶æ¡†æž¶
 	 * @return array
 	 */
 	function getAuthorizeURL( $url, $response_type = 'code', $state = NULL, $display = NULL ) {
@@ -164,15 +164,15 @@ class SaeTOAuthV2 {
 	}
 
 	/**
-	 * access_token接口
+	 * access_tokenæŽ¥å�£
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/OAuth2/access_token OAuth2/access_token}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/OAuth2/access_token OAuth2/access_token}
 	 *
-	 * @param string $type 请求的类型,可以为:code, password, token
-	 * @param array $keys 其他参数：
-	 *  - 当$type为code时： array('code'=>..., 'redirect_uri'=>...)
-	 *  - 当$type为password时： array('username'=>..., 'password'=>...)
-	 *  - 当$type为token时： array('refresh_token'=>...)
+	 * @param string $type è¯·æ±‚çš„ç±»åž‹,å�¯ä»¥ä¸º:code, password, token
+	 * @param array $keys å…¶ä»–å�‚æ•°ï¼š
+	 *  - å½“$typeä¸ºcodeæ—¶ï¼š array('code'=>..., 'redirect_uri'=>...)
+	 *  - å½“$typeä¸ºpasswordæ—¶ï¼š array('username'=>..., 'password'=>...)
+	 *  - å½“$typeä¸ºtokenæ—¶ï¼š array('refresh_token'=>...)
 	 * @return array
 	 */
 	function getAccessToken( $type = 'code', $keys ) {
@@ -206,9 +206,9 @@ class SaeTOAuthV2 {
 	}
 
 	/**
-	 * 解析 signed_request
+	 * è§£æž� signed_request
 	 *
-	 * @param string $signed_request 应用框架在加载iframe时会通过向Canvas URL post的参数signed_request
+	 * @param string $signed_request åº”ç”¨æ¡†æž¶åœ¨åŠ è½½iframeæ—¶ä¼šé€šè¿‡å�‘Canvas URL postçš„å�‚æ•°signed_request
 	 *
 	 * @return array
 	 */
@@ -229,9 +229,9 @@ class SaeTOAuthV2 {
 	}
 
 	/**
-	 * 读取jssdk授权信息，用于和jssdk的同步登录
+	 * è¯»å�–jssdkæŽˆæ�ƒä¿¡æ�¯ï¼Œç”¨äºŽå’Œjssdkçš„å�Œæ­¥ç™»å½•
 	 *
-	 * @return array 成功返回array('access_token'=>'value', 'refresh_token'=>'value'); 失败返回false
+	 * @return array æˆ�åŠŸè¿”å›žarray('access_token'=>'value', 'refresh_token'=>'value'); å¤±è´¥è¿”å›žfalse
 	 */
 	function getTokenFromJSSDK() {
 		$key = "weibojs_" . $this->client_id;
@@ -250,11 +250,11 @@ class SaeTOAuthV2 {
 	}
 
 	/**
-	 * 从数组中读取access_token和refresh_token
-	 * 常用于从Session或Cookie中读取token，或通过Session/Cookie中是否存有token判断登录状态。
+	 * ä»Žæ•°ç»„ä¸­è¯»å�–access_tokenå’Œrefresh_token
+	 * å¸¸ç”¨äºŽä»ŽSessionæˆ–Cookieä¸­è¯»å�–tokenï¼Œæˆ–é€šè¿‡Session/Cookieä¸­æ˜¯å�¦å­˜æœ‰tokenåˆ¤æ–­ç™»å½•çŠ¶æ€�ã€‚
 	 *
-	 * @param array $arr 存有access_token和secret_token的数组
-	 * @return array 成功返回array('access_token'=>'value', 'refresh_token'=>'value'); 失败返回false
+	 * @param array $arr å­˜æœ‰access_tokenå’Œsecret_tokençš„æ•°ç»„
+	 * @return array æˆ�åŠŸè¿”å›žarray('access_token'=>'value', 'refresh_token'=>'value'); å¤±è´¥è¿”å›žfalse
 	 */
 	function getTokenFromArray( $arr ) {
 		if (isset($arr['access_token']) && $arr['access_token']) {
@@ -471,9 +471,9 @@ class SaeTOAuthV2 {
 
 
 /**
- * 新浪微博操作类V2
+ * æ–°æµªå¾®å�šæ“�ä½œç±»V2
  *
- * 使用前需要先手工调用saetv2.ex.class.php <br />
+ * ä½¿ç”¨å‰�éœ€è¦�å…ˆæ‰‹å·¥è°ƒç”¨saetv2.ex.class.php <br />
  *
  * @package sae
  * @author Easy Chen, Elmer Zhang,Lazypeople
@@ -482,13 +482,13 @@ class SaeTOAuthV2 {
 class SaeTClientV2
 {
 	/**
-	 * 构造函数
+	 * æž„é€ å‡½æ•°
 	 * 
 	 * @access public
-	 * @param mixed $akey 微博开放平台应用APP KEY
-	 * @param mixed $skey 微博开放平台应用APP SECRET
-	 * @param mixed $access_token OAuth认证返回的token
-	 * @param mixed $refresh_token OAuth认证返回的token secret
+	 * @param mixed $akey å¾®å�šå¼€æ”¾å¹³å�°åº”ç”¨APP KEY
+	 * @param mixed $skey å¾®å�šå¼€æ”¾å¹³å�°åº”ç”¨APP SECRET
+	 * @param mixed $access_token OAuthè®¤è¯�è¿”å›žçš„token
+	 * @param mixed $refresh_token OAuthè®¤è¯�è¿”å›žçš„token secret
 	 * @return void
 	 */
 	function __construct( $akey, $skey, $access_token, $refresh_token = NULL)
@@ -497,12 +497,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 开启调试信息
+	 * å¼€å�¯è°ƒè¯•ä¿¡æ�¯
 	 *
-	 * 开启调试信息后，SDK会将每次请求微博API所发送的POST Data、Headers以及请求信息、返回内容输出出来。
+	 * å¼€å�¯è°ƒè¯•ä¿¡æ�¯å�Žï¼ŒSDKä¼šå°†æ¯�æ¬¡è¯·æ±‚å¾®å�šAPIæ‰€å�‘é€�çš„POST Dataã€�Headersä»¥å�Šè¯·æ±‚ä¿¡æ�¯ã€�è¿”å›žå†…å®¹è¾“å‡ºå‡ºæ�¥ã€‚
 	 *
 	 * @access public
-	 * @param bool $enable 是否开启调试信息
+	 * @param bool $enable æ˜¯å�¦å¼€å�¯è°ƒè¯•ä¿¡æ�¯
 	 * @return void
 	 */
 	function set_debug( $enable )
@@ -511,13 +511,13 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 设置用户IP
+	 * è®¾ç½®ç”¨æˆ·IP
 	 *
-	 * SDK默认将会通过$_SERVER['REMOTE_ADDR']获取用户IP，在请求微博API时将用户IP附加到Request Header中。但某些情况下$_SERVER['REMOTE_ADDR']取到的IP并非用户IP，而是一个固定的IP（例如使用SAE的Cron或TaskQueue服务时），此时就有可能会造成该固定IP达到微博API调用频率限额，导致API调用失败。此时可使用本方法设置用户IP，以避免此问题。
+	 * SDKé»˜è®¤å°†ä¼šé€šè¿‡$_SERVER['REMOTE_ADDR']èŽ·å�–ç”¨æˆ·IPï¼Œåœ¨è¯·æ±‚å¾®å�šAPIæ—¶å°†ç”¨æˆ·IPé™„åŠ åˆ°Request Headerä¸­ã€‚ä½†æŸ�äº›æƒ…å†µä¸‹$_SERVER['REMOTE_ADDR']å�–åˆ°çš„IPå¹¶é�žç”¨æˆ·IPï¼Œè€Œæ˜¯ä¸€ä¸ªå›ºå®šçš„IPï¼ˆä¾‹å¦‚ä½¿ç”¨SAEçš„Cronæˆ–TaskQueueæœ�åŠ¡æ—¶ï¼‰ï¼Œæ­¤æ—¶å°±æœ‰å�¯èƒ½ä¼šé€ æˆ�è¯¥å›ºå®šIPè¾¾åˆ°å¾®å�šAPIè°ƒç”¨é¢‘çŽ‡é™�é¢�ï¼Œå¯¼è‡´APIè°ƒç”¨å¤±è´¥ã€‚æ­¤æ—¶å�¯ä½¿ç”¨æœ¬æ–¹æ³•è®¾ç½®ç”¨æˆ·IPï¼Œä»¥é�¿å…�æ­¤é—®é¢˜ã€‚
 	 *
 	 * @access public
-	 * @param string $ip 用户IP
-	 * @return bool IP为非法IP字符串时，返回false，否则返回true
+	 * @param string $ip ç”¨æˆ·IP
+	 * @return bool IPä¸ºé�žæ³•IPå­—ç¬¦ä¸²æ—¶ï¼Œè¿”å›žfalseï¼Œå�¦åˆ™è¿”å›žtrue
 	 */
 	function set_remote_ip( $ip )
 	{
@@ -530,14 +530,14 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取最新的公共微博消息
+	 * èŽ·å�–æœ€æ–°çš„å…¬å…±å¾®å�šæ¶ˆæ�¯
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/public_timeline statuses/public_timeline}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/public_timeline statuses/public_timeline}
 	 *
 	 * @access public
-	 * @param int $count 单页返回的记录条数，默认为50。
-	 * @param int $page 返回结果的页码，默认为1。
-	 * @param int $base_app 是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
+	 * @param int $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $base_app æ˜¯å�¦å�ªèŽ·å�–å½“å‰�åº”ç”¨çš„æ•°æ�®ã€‚0ä¸ºå�¦ï¼ˆæ‰€æœ‰æ•°æ�®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰�åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function public_timeline( $page = 1, $count = 50, $base_app = 0 )
@@ -546,22 +546,22 @@ class SaeTClientV2
 		$params['count'] = intval($count);
 		$params['page'] = intval($page);
 		$params['base_app'] = intval($base_app);
-		return $this->oauth->get('statuses/public_timeline', $params);//可能是接口的bug不能补全
+		return $this->oauth->get('statuses/public_timeline', $params);//å�¯èƒ½æ˜¯æŽ¥å�£çš„bugä¸�èƒ½è¡¥å…¨
 	}
 
 	/**
-	 * 获取当前登录用户及其所关注用户的最新微博消息。
+	 * èŽ·å�–å½“å‰�ç™»å½•ç”¨æˆ·å�Šå…¶æ‰€å…³æ³¨ç”¨æˆ·çš„æœ€æ–°å¾®å�šæ¶ˆæ�¯ã€‚
 	 *
-	 * 获取当前登录用户及其所关注用户的最新微博消息。和用户登录 http://weibo.com 后在“我的首页”中看到的内容相同。同friends_timeline()
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/statuses/home_timeline statuses/home_timeline}
+	 * èŽ·å�–å½“å‰�ç™»å½•ç”¨æˆ·å�Šå…¶æ‰€å…³æ³¨ç”¨æˆ·çš„æœ€æ–°å¾®å�šæ¶ˆæ�¯ã€‚å’Œç”¨æˆ·ç™»å½• http://weibo.com å�Žåœ¨â€œæˆ‘çš„é¦–é¡µâ€�ä¸­çœ‹åˆ°çš„å†…å®¹ç›¸å�Œã€‚å�Œfriends_timeline()
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/home_timeline statuses/home_timeline}
 	 * 
 	 * @access public
-	 * @param int $page 指定返回结果的页码。根据当前登录用户所关注的用户数及这些被关注用户发表的微博数，翻页功能最多能查看的总记录数会有所不同，通常最多能查看1000条左右。默认值1。可选。
-	 * @param int $count 每次返回的记录数。缺省值50，最大值200。可选。
-	 * @param int $since_id 若指定此参数，则只返回ID比since_id大的微博消息（即比since_id发表时间晚的微博消息）。可选。
-	 * @param int $max_id 若指定此参数，则返回ID小于或等于max_id的微博消息。可选。
-	 * @param int $base_app 是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
-	 * @param int $feature 过滤类型ID，0：全部、1：原创、2：图片、3：视频、4：音乐，默认为0。
+	 * @param int $page æŒ‡å®šè¿”å›žç»“æžœçš„é¡µç �ã€‚æ ¹æ�®å½“å‰�ç™»å½•ç”¨æˆ·æ‰€å…³æ³¨çš„ç”¨æˆ·æ•°å�Šè¿™äº›è¢«å…³æ³¨ç”¨æˆ·å�‘è¡¨çš„å¾®å�šæ•°ï¼Œç¿»é¡µåŠŸèƒ½æœ€å¤šèƒ½æŸ¥çœ‹çš„æ€»è®°å½•æ•°ä¼šæœ‰æ‰€ä¸�å�Œï¼Œé€šå¸¸æœ€å¤šèƒ½æŸ¥çœ‹1000æ�¡å·¦å�³ã€‚é»˜è®¤å€¼1ã€‚å�¯é€‰ã€‚
+	 * @param int $count æ¯�æ¬¡è¿”å›žçš„è®°å½•æ•°ã€‚ç¼ºçœ�å€¼50ï¼Œæœ€å¤§å€¼200ã€‚å�¯é€‰ã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™å�ªè¿”å›žIDæ¯”since_idå¤§çš„å¾®å�šæ¶ˆæ�¯ï¼ˆå�³æ¯”since_idå�‘è¡¨æ—¶é—´æ™šçš„å¾®å�šæ¶ˆæ�¯ï¼‰ã€‚å�¯é€‰ã€‚
+	 * @param int $max_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDå°�äºŽæˆ–ç­‰äºŽmax_idçš„å¾®å�šæ¶ˆæ�¯ã€‚å�¯é€‰ã€‚
+	 * @param int $base_app æ˜¯å�¦å�ªèŽ·å�–å½“å‰�åº”ç”¨çš„æ•°æ�®ã€‚0ä¸ºå�¦ï¼ˆæ‰€æœ‰æ•°æ�®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰�åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $feature è¿‡æ»¤ç±»åž‹IDï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šåŽŸåˆ›ã€�2ï¼šå›¾ç‰‡ã€�3ï¼šè§†é¢‘ã€�4ï¼šéŸ³ä¹�ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function home_timeline( $page = 1, $count = 50, $since_id = 0, $max_id = 0, $base_app = 0, $feature = 0 )
@@ -584,18 +584,18 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取当前登录用户及其所关注用户的最新微博消息。
+	 * èŽ·å�–å½“å‰�ç™»å½•ç”¨æˆ·å�Šå…¶æ‰€å…³æ³¨ç”¨æˆ·çš„æœ€æ–°å¾®å�šæ¶ˆæ�¯ã€‚
 	 *
-	 * 获取当前登录用户及其所关注用户的最新微博消息。和用户登录 http://weibo.com 后在“我的首页”中看到的内容相同。同home_timeline()
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/statuses/friends_timeline statuses/friends_timeline}
+	 * èŽ·å�–å½“å‰�ç™»å½•ç”¨æˆ·å�Šå…¶æ‰€å…³æ³¨ç”¨æˆ·çš„æœ€æ–°å¾®å�šæ¶ˆæ�¯ã€‚å’Œç”¨æˆ·ç™»å½• http://weibo.com å�Žåœ¨â€œæˆ‘çš„é¦–é¡µâ€�ä¸­çœ‹åˆ°çš„å†…å®¹ç›¸å�Œã€‚å�Œhome_timeline()
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/friends_timeline statuses/friends_timeline}
 	 * 
 	 * @access public
-	 * @param int $page 指定返回结果的页码。根据当前登录用户所关注的用户数及这些被关注用户发表的微博数，翻页功能最多能查看的总记录数会有所不同，通常最多能查看1000条左右。默认值1。可选。
-	 * @param int $count 每次返回的记录数。缺省值50，最大值200。可选。
-	 * @param int $since_id 若指定此参数，则只返回ID比since_id大的微博消息（即比since_id发表时间晚的微博消息）。可选。
-	 * @param int $max_id 若指定此参数，则返回ID小于或等于max_id的微博消息。可选。
-	 * @param int $base_app 是否基于当前应用来获取数据。1为限制本应用微博，0为不做限制。默认为0。可选。
-	 * @param int $feature 微博类型，0全部，1原创，2图片，3视频，4音乐. 返回指定类型的微博信息内容。转为为0。可选。
+	 * @param int $page æŒ‡å®šè¿”å›žç»“æžœçš„é¡µç �ã€‚æ ¹æ�®å½“å‰�ç™»å½•ç”¨æˆ·æ‰€å…³æ³¨çš„ç”¨æˆ·æ•°å�Šè¿™äº›è¢«å…³æ³¨ç”¨æˆ·å�‘è¡¨çš„å¾®å�šæ•°ï¼Œç¿»é¡µåŠŸèƒ½æœ€å¤šèƒ½æŸ¥çœ‹çš„æ€»è®°å½•æ•°ä¼šæœ‰æ‰€ä¸�å�Œï¼Œé€šå¸¸æœ€å¤šèƒ½æŸ¥çœ‹1000æ�¡å·¦å�³ã€‚é»˜è®¤å€¼1ã€‚å�¯é€‰ã€‚
+	 * @param int $count æ¯�æ¬¡è¿”å›žçš„è®°å½•æ•°ã€‚ç¼ºçœ�å€¼50ï¼Œæœ€å¤§å€¼200ã€‚å�¯é€‰ã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™å�ªè¿”å›žIDæ¯”since_idå¤§çš„å¾®å�šæ¶ˆæ�¯ï¼ˆå�³æ¯”since_idå�‘è¡¨æ—¶é—´æ™šçš„å¾®å�šæ¶ˆæ�¯ï¼‰ã€‚å�¯é€‰ã€‚
+	 * @param int $max_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDå°�äºŽæˆ–ç­‰äºŽmax_idçš„å¾®å�šæ¶ˆæ�¯ã€‚å�¯é€‰ã€‚
+	 * @param int $base_app æ˜¯å�¦åŸºäºŽå½“å‰�åº”ç”¨æ�¥èŽ·å�–æ•°æ�®ã€‚1ä¸ºé™�åˆ¶æœ¬åº”ç”¨å¾®å�šï¼Œ0ä¸ºä¸�å�šé™�åˆ¶ã€‚é»˜è®¤ä¸º0ã€‚å�¯é€‰ã€‚
+	 * @param int $feature å¾®å�šç±»åž‹ï¼Œ0å…¨éƒ¨ï¼Œ1åŽŸåˆ›ï¼Œ2å›¾ç‰‡ï¼Œ3è§†é¢‘ï¼Œ4éŸ³ä¹�. è¿”å›žæŒ‡å®šç±»åž‹çš„å¾®å�šä¿¡æ�¯å†…å®¹ã€‚è½¬ä¸ºä¸º0ã€‚å�¯é€‰ã€‚
 	 * @return array
 	 */
 	function friends_timeline( $page = 1, $count = 50, $since_id = 0, $max_id = 0, $base_app = 0, $feature = 0 )
@@ -604,20 +604,20 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取用户发布的微博信息列表
+	 * èŽ·å�–ç”¨æˆ·å�‘å¸ƒçš„å¾®å�šä¿¡æ�¯åˆ—è¡¨
 	 *
-	 * 返回用户的发布的最近n条信息，和用户微博页面返回内容是一致的。此接口也可以请求其他用户的最新发表微博。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/statuses/user_timeline statuses/user_timeline}
+	 * è¿”å›žç”¨æˆ·çš„å�‘å¸ƒçš„æœ€è¿‘næ�¡ä¿¡æ�¯ï¼Œå’Œç”¨æˆ·å¾®å�šé¡µé�¢è¿”å›žå†…å®¹æ˜¯ä¸€è‡´çš„ã€‚æ­¤æŽ¥å�£ä¹Ÿå�¯ä»¥è¯·æ±‚å…¶ä»–ç”¨æˆ·çš„æœ€æ–°å�‘è¡¨å¾®å�šã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/user_timeline statuses/user_timeline}
 	 * 
 	 * @access public
-	 * @param int $page 页码
-	 * @param int $count 每次返回的最大记录数，最多返回200条，默认50。
-	 * @param mixed $uid 指定用户UID或微博昵称
-	 * @param int $since_id 若指定此参数，则只返回ID比since_id大的微博消息（即比since_id发表时间晚的微博消息）。可选。
-	 * @param int $max_id 若指定此参数，则返回ID小于或等于max_id的提到当前登录用户微博消息。可选。
-	 * @param int $base_app 是否基于当前应用来获取数据。1为限制本应用微博，0为不做限制。默认为0。
-	 * @param int $feature 过滤类型ID，0：全部、1：原创、2：图片、3：视频、4：音乐，默认为0。
-	 * @param int $trim_user 返回值中user信息开关，0：返回完整的user信息、1：user字段仅返回uid，默认为0。
+	 * @param int $page é¡µç �
+	 * @param int $count æ¯�æ¬¡è¿”å›žçš„æœ€å¤§è®°å½•æ•°ï¼Œæœ€å¤šè¿”å›ž200æ�¡ï¼Œé»˜è®¤50ã€‚
+	 * @param mixed $uid æŒ‡å®šç”¨æˆ·UIDæˆ–å¾®å�šæ˜µç§°
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™å�ªè¿”å›žIDæ¯”since_idå¤§çš„å¾®å�šæ¶ˆæ�¯ï¼ˆå�³æ¯”since_idå�‘è¡¨æ—¶é—´æ™šçš„å¾®å�šæ¶ˆæ�¯ï¼‰ã€‚å�¯é€‰ã€‚
+	 * @param int $max_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDå°�äºŽæˆ–ç­‰äºŽmax_idçš„æ��åˆ°å½“å‰�ç™»å½•ç”¨æˆ·å¾®å�šæ¶ˆæ�¯ã€‚å�¯é€‰ã€‚
+	 * @param int $base_app æ˜¯å�¦åŸºäºŽå½“å‰�åº”ç”¨æ�¥èŽ·å�–æ•°æ�®ã€‚1ä¸ºé™�åˆ¶æœ¬åº”ç”¨å¾®å�šï¼Œ0ä¸ºä¸�å�šé™�åˆ¶ã€‚é»˜è®¤ä¸º0ã€‚
+	 * @param int $feature è¿‡æ»¤ç±»åž‹IDï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šåŽŸåˆ›ã€�2ï¼šå›¾ç‰‡ã€�3ï¼šè§†é¢‘ã€�4ï¼šéŸ³ä¹�ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $trim_user è¿”å›žå€¼ä¸­userä¿¡æ�¯å¼€å…³ï¼Œ0ï¼šè¿”å›žå®Œæ•´çš„userä¿¡æ�¯ã€�1ï¼šuserå­—æ®µä»…è¿”å›žuidï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function user_timeline_by_id( $uid = NULL , $page = 1 , $count = 50 , $since_id = 0, $max_id = 0, $feature = 0, $trim_user = 0, $base_app = 0)
@@ -643,20 +643,20 @@ class SaeTClientV2
 	
 	
 	/**
-	 * 获取用户发布的微博信息列表
+	 * èŽ·å�–ç”¨æˆ·å�‘å¸ƒçš„å¾®å�šä¿¡æ�¯åˆ—è¡¨
 	 *
-	 * 返回用户的发布的最近n条信息，和用户微博页面返回内容是一致的。此接口也可以请求其他用户的最新发表微博。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/statuses/user_timeline statuses/user_timeline}
+	 * è¿”å›žç”¨æˆ·çš„å�‘å¸ƒçš„æœ€è¿‘næ�¡ä¿¡æ�¯ï¼Œå’Œç”¨æˆ·å¾®å�šé¡µé�¢è¿”å›žå†…å®¹æ˜¯ä¸€è‡´çš„ã€‚æ­¤æŽ¥å�£ä¹Ÿå�¯ä»¥è¯·æ±‚å…¶ä»–ç”¨æˆ·çš„æœ€æ–°å�‘è¡¨å¾®å�šã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/user_timeline statuses/user_timeline}
 	 * 
 	 * @access public
-	 * @param string $screen_name 微博昵称，主要是用来区分用户UID跟微博昵称，当二者一样而产生歧义的时候，建议使用该参数 
-	 * @param int $page 页码
-	 * @param int $count 每次返回的最大记录数，最多返回200条，默认50。
-	 * @param int $since_id 若指定此参数，则只返回ID比since_id大的微博消息（即比since_id发表时间晚的微博消息）。可选。
-	 * @param int $max_id 若指定此参数，则返回ID小于或等于max_id的提到当前登录用户微博消息。可选。
-	 * @param int $feature 过滤类型ID，0：全部、1：原创、2：图片、3：视频、4：音乐，默认为0。
-	 * @param int $trim_user 返回值中user信息开关，0：返回完整的user信息、1：user字段仅返回uid，默认为0。
-	 * @param int $base_app 是否基于当前应用来获取数据。1为限制本应用微博，0为不做限制。默认为0。
+	 * @param string $screen_name å¾®å�šæ˜µç§°ï¼Œä¸»è¦�æ˜¯ç”¨æ�¥åŒºåˆ†ç”¨æˆ·UIDè·Ÿå¾®å�šæ˜µç§°ï¼Œå½“äºŒè€…ä¸€æ ·è€Œäº§ç”Ÿæ­§ä¹‰çš„æ—¶å€™ï¼Œå»ºè®®ä½¿ç”¨è¯¥å�‚æ•° 
+	 * @param int $page é¡µç �
+	 * @param int $count æ¯�æ¬¡è¿”å›žçš„æœ€å¤§è®°å½•æ•°ï¼Œæœ€å¤šè¿”å›ž200æ�¡ï¼Œé»˜è®¤50ã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™å�ªè¿”å›žIDæ¯”since_idå¤§çš„å¾®å�šæ¶ˆæ�¯ï¼ˆå�³æ¯”since_idå�‘è¡¨æ—¶é—´æ™šçš„å¾®å�šæ¶ˆæ�¯ï¼‰ã€‚å�¯é€‰ã€‚
+	 * @param int $max_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDå°�äºŽæˆ–ç­‰äºŽmax_idçš„æ��åˆ°å½“å‰�ç™»å½•ç”¨æˆ·å¾®å�šæ¶ˆæ�¯ã€‚å�¯é€‰ã€‚
+	 * @param int $feature è¿‡æ»¤ç±»åž‹IDï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šåŽŸåˆ›ã€�2ï¼šå›¾ç‰‡ã€�3ï¼šè§†é¢‘ã€�4ï¼šéŸ³ä¹�ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $trim_user è¿”å›žå€¼ä¸­userä¿¡æ�¯å¼€å…³ï¼Œ0ï¼šè¿”å›žå®Œæ•´çš„userä¿¡æ�¯ã€�1ï¼šuserå­—æ®µä»…è¿”å›žuidï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $base_app æ˜¯å�¦åŸºäºŽå½“å‰�åº”ç”¨æ�¥èŽ·å�–æ•°æ�®ã€‚1ä¸ºé™�åˆ¶æœ¬åº”ç”¨å¾®å�šï¼Œ0ä¸ºä¸�å�šé™�åˆ¶ã€‚é»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function user_timeline_by_name( $screen_name = NULL , $page = 1 , $count = 50 , $since_id = 0, $max_id = 0, $feature = 0, $trim_user = 0, $base_app = 0 )
@@ -683,15 +683,15 @@ class SaeTClientV2
 	
 	
 	/**
-	 * 批量获取指定的一批用户的timeline
+	 * æ‰¹é‡�èŽ·å�–æŒ‡å®šçš„ä¸€æ‰¹ç”¨æˆ·çš„timeline
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/timeline_batch statuses/timeline_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/timeline_batch statuses/timeline_batch}
 	 *
-	 * @param string $screen_name  需要查询的用户昵称，用半角逗号分隔，一次最多20个
-	 * @param int    $count        单页返回的记录条数，默认为50。
-	 * @param int    $page  返回结果的页码，默认为1。 
-	 * @param int    $base_app  是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
-	 * @param int    $feature   过滤类型ID，0：全部、1：原创、2：图片、3：视频、4：音乐，默认为0。
+	 * @param string $screen_name  éœ€è¦�æŸ¥è¯¢çš„ç”¨æˆ·æ˜µç§°ï¼Œç”¨å�Šè§’é€—å�·åˆ†éš”ï¼Œä¸€æ¬¡æœ€å¤š20ä¸ª
+	 * @param int    $count        å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int    $page  è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚ 
+	 * @param int    $base_app  æ˜¯å�¦å�ªèŽ·å�–å½“å‰�åº”ç”¨çš„æ•°æ�®ã€‚0ä¸ºå�¦ï¼ˆæ‰€æœ‰æ•°æ�®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰�åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int    $feature   è¿‡æ»¤ç±»åž‹IDï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šåŽŸåˆ›ã€�2ï¼šå›¾ç‰‡ã€�3ï¼šè§†é¢‘ã€�4ï¼šéŸ³ä¹�ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function timeline_batch_by_name( $screen_name, $page = 1, $count = 50, $feature = 0, $base_app = 0)
@@ -710,15 +710,15 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 批量获取指定的一批用户的timeline
+	 * æ‰¹é‡�èŽ·å�–æŒ‡å®šçš„ä¸€æ‰¹ç”¨æˆ·çš„timeline
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/timeline_batch statuses/timeline_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/timeline_batch statuses/timeline_batch}
 	 *
-	 * @param string $uids  需要查询的用户ID，用半角逗号分隔，一次最多20个。
-	 * @param int    $count        单页返回的记录条数，默认为50。
-	 * @param int    $page  返回结果的页码，默认为1。 
-	 * @param int    $base_app  是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
-	 * @param int    $feature   过滤类型ID，0：全部、1：原创、2：图片、3：视频、4：音乐，默认为0。
+	 * @param string $uids  éœ€è¦�æŸ¥è¯¢çš„ç”¨æˆ·IDï¼Œç”¨å�Šè§’é€—å�·åˆ†éš”ï¼Œä¸€æ¬¡æœ€å¤š20ä¸ªã€‚
+	 * @param int    $count        å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int    $page  è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚ 
+	 * @param int    $base_app  æ˜¯å�¦å�ªèŽ·å�–å½“å‰�åº”ç”¨çš„æ•°æ�®ã€‚0ä¸ºå�¦ï¼ˆæ‰€æœ‰æ•°æ�®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰�åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int    $feature   è¿‡æ»¤ç±»åž‹IDï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šåŽŸåˆ›ã€�2ï¼šå›¾ç‰‡ã€�3ï¼šè§†é¢‘ã€�4ï¼šéŸ³ä¹�ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function timeline_batch_by_id( $uids, $page = 1, $count = 50, $feature = 0, $base_app = 0)
@@ -741,17 +741,17 @@ class SaeTClientV2
 
 
 	/**
-	 * 返回一条原创微博消息的最新n条转发微博消息。本接口无法对非原创微博进行查询。 
+	 * è¿”å›žä¸€æ�¡åŽŸåˆ›å¾®å�šæ¶ˆæ�¯çš„æœ€æ–°næ�¡è½¬å�‘å¾®å�šæ¶ˆæ�¯ã€‚æœ¬æŽ¥å�£æ— æ³•å¯¹é�žåŽŸåˆ›å¾®å�šè¿›è¡ŒæŸ¥è¯¢ã€‚ 
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/repost_timeline statuses/repost_timeline}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/repost_timeline statuses/repost_timeline}
 	 * 
 	 * @access public
-	 * @param int $sid 要获取转发微博列表的原创微博ID。
-	 * @param int $page 返回结果的页码。 
-	 * @param int $count 单页返回的最大记录数，最多返回200条，默认50。可选。
-	 * @param int $since_id 若指定此参数，则只返回ID比since_id大的记录（比since_id发表时间晚）。可选。
-	 * @param int $max_id 若指定此参数，则返回ID小于或等于max_id的记录。可选。
-	 * @param int $filter_by_author 作者筛选类型，0：全部、1：我关注的人、2：陌生人，默认为0。
+	 * @param int $sid è¦�èŽ·å�–è½¬å�‘å¾®å�šåˆ—è¡¨çš„åŽŸåˆ›å¾®å�šIDã€‚
+	 * @param int $page è¿”å›žç»“æžœçš„é¡µç �ã€‚ 
+	 * @param int $count å�•é¡µè¿”å›žçš„æœ€å¤§è®°å½•æ•°ï¼Œæœ€å¤šè¿”å›ž200æ�¡ï¼Œé»˜è®¤50ã€‚å�¯é€‰ã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™å�ªè¿”å›žIDæ¯”since_idå¤§çš„è®°å½•ï¼ˆæ¯”since_idå�‘è¡¨æ—¶é—´æ™šï¼‰ã€‚å�¯é€‰ã€‚
+	 * @param int $max_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDå°�äºŽæˆ–ç­‰äºŽmax_idçš„è®°å½•ã€‚å�¯é€‰ã€‚
+	 * @param int $filter_by_author ä½œè€…ç­›é€‰ç±»åž‹ï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šæˆ‘å…³æ³¨çš„äººã€�2ï¼šé™Œç”Ÿäººï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function repost_timeline( $sid, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0 )
@@ -774,15 +774,15 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取当前用户最新转发的n条微博消息
+	 * èŽ·å�–å½“å‰�ç”¨æˆ·æœ€æ–°è½¬å�‘çš„næ�¡å¾®å�šæ¶ˆæ�¯
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/repost_by_me statuses/repost_by_me}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/repost_by_me statuses/repost_by_me}
 	 * 
 	 * @access public
-	 * @param int $page 返回结果的页码。 
-	 * @param int $count  每次返回的最大记录数，最多返回200条，默认50。可选。
-	 * @param int $since_id 若指定此参数，则只返回ID比since_id大的记录（比since_id发表时间晚）。可选。
-	 * @param int $max_id  若指定此参数，则返回ID小于或等于max_id的记录。可选。
+	 * @param int $page è¿”å›žç»“æžœçš„é¡µç �ã€‚ 
+	 * @param int $count  æ¯�æ¬¡è¿”å›žçš„æœ€å¤§è®°å½•æ•°ï¼Œæœ€å¤šè¿”å›ž200æ�¡ï¼Œé»˜è®¤50ã€‚å�¯é€‰ã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™å�ªè¿”å›žIDæ¯”since_idå¤§çš„è®°å½•ï¼ˆæ¯”since_idå�‘è¡¨æ—¶é—´æ™šï¼‰ã€‚å�¯é€‰ã€‚
+	 * @param int $max_id  è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDå°�äºŽæˆ–ç­‰äºŽmax_idçš„è®°å½•ã€‚å�¯é€‰ã€‚
 	 * @return array
 	 */
 	function repost_by_me( $page = 1, $count = 50, $since_id = 0, $max_id = 0 )
@@ -801,19 +801,19 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取@当前用户的微博列表
+	 * èŽ·å�–@å½“å‰�ç”¨æˆ·çš„å¾®å�šåˆ—è¡¨
 	 *
-	 * 返回最新n条提到登录用户的微博消息（即包含@username的微博消息）
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/statuses/mentions statuses/mentions}
+	 * è¿”å›žæœ€æ–°næ�¡æ��åˆ°ç™»å½•ç”¨æˆ·çš„å¾®å�šæ¶ˆæ�¯ï¼ˆå�³åŒ…å�«@usernameçš„å¾®å�šæ¶ˆæ�¯ï¼‰
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/mentions statuses/mentions}
 	 * 
 	 * @access public
-	 * @param int $page 返回结果的页序号。
-	 * @param int $count 每次返回的最大记录数（即页面大小），不大于200，默认为50。
-	 * @param int $since_id 若指定此参数，则只返回ID比since_id大的微博消息（即比since_id发表时间晚的微博消息）。可选。
-	 * @param int $max_id 若指定此参数，则返回ID小于或等于max_id的提到当前登录用户微博消息。可选。
-	 * @param int $filter_by_author 作者筛选类型，0：全部、1：我关注的人、2：陌生人，默认为0。
-	 * @param int $filter_by_source 来源筛选类型，0：全部、1：来自微博、2：来自微群，默认为0。
-	 * @param int $filter_by_type 原创筛选类型，0：全部微博、1：原创的微博，默认为0。
+	 * @param int $page è¿”å›žç»“æžœçš„é¡µåº�å�·ã€‚
+	 * @param int $count æ¯�æ¬¡è¿”å›žçš„æœ€å¤§è®°å½•æ•°ï¼ˆå�³é¡µé�¢å¤§å°�ï¼‰ï¼Œä¸�å¤§äºŽ200ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™å�ªè¿”å›žIDæ¯”since_idå¤§çš„å¾®å�šæ¶ˆæ�¯ï¼ˆå�³æ¯”since_idå�‘è¡¨æ—¶é—´æ™šçš„å¾®å�šæ¶ˆæ�¯ï¼‰ã€‚å�¯é€‰ã€‚
+	 * @param int $max_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDå°�äºŽæˆ–ç­‰äºŽmax_idçš„æ��åˆ°å½“å‰�ç™»å½•ç”¨æˆ·å¾®å�šæ¶ˆæ�¯ã€‚å�¯é€‰ã€‚
+	 * @param int $filter_by_author ä½œè€…ç­›é€‰ç±»åž‹ï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šæˆ‘å…³æ³¨çš„äººã€�2ï¼šé™Œç”Ÿäººï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $filter_by_source æ�¥æº�ç­›é€‰ç±»åž‹ï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šæ�¥è‡ªå¾®å�šã€�2ï¼šæ�¥è‡ªå¾®ç¾¤ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $filter_by_type åŽŸåˆ›ç­›é€‰ç±»åž‹ï¼Œ0ï¼šå…¨éƒ¨å¾®å�šã€�1ï¼šåŽŸåˆ›çš„å¾®å�šï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function mentions( $page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0, $filter_by_source = 0, $filter_by_type = 0 )
@@ -836,13 +836,13 @@ class SaeTClientV2
 
 
 	/**
-	 * 根据ID获取单条微博信息内容
+	 * æ ¹æ�®IDèŽ·å�–å�•æ�¡å¾®å�šä¿¡æ�¯å†…å®¹
 	 *
-	 * 获取单条ID的微博信息，作者信息将同时返回。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/statuses/show statuses/show}
+	 * èŽ·å�–å�•æ�¡IDçš„å¾®å�šä¿¡æ�¯ï¼Œä½œè€…ä¿¡æ�¯å°†å�Œæ—¶è¿”å›žã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/show statuses/show}
 	 * 
 	 * @access public
-	 * @param int $id 要获取已发表的微博ID, 如ID不存在返回空
+	 * @param int $id è¦�èŽ·å�–å·²å�‘è¡¨çš„å¾®å�šID, å¦‚IDä¸�å­˜åœ¨è¿”å›žç©º
 	 * @return array
 	 */
 	function show_status( $id )
@@ -854,11 +854,11 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 根据微博id号获取微博的信息
+	 * æ ¹æ�®å¾®å�šidå�·èŽ·å�–å¾®å�šçš„ä¿¡æ�¯
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/show_batch statuses/show_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/show_batch statuses/show_batch}
 	 *
-	 * @param string $ids 需要查询的微博ID，用半角逗号分隔，最多不超过50个。
+	 * @param string $ids éœ€è¦�æŸ¥è¯¢çš„å¾®å�šIDï¼Œç”¨å�Šè§’é€—å�·åˆ†éš”ï¼Œæœ€å¤šä¸�è¶…è¿‡50ä¸ªã€‚
 	 * @return array
 	 */
     function show_batch( $ids )
@@ -876,13 +876,13 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 通过微博（评论、私信）ID获取其MID
+	 * é€šè¿‡å¾®å�šï¼ˆè¯„è®ºã€�ç§�ä¿¡ï¼‰IDèŽ·å�–å…¶MID
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/querymid statuses/querymid}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/querymid statuses/querymid}
 	 *
-	 * @param int|string $id  需要查询的微博（评论、私信）ID，批量模式下，用半角逗号分隔，最多不超过20个。
-	 * @param int $type  获取类型，1：微博、2：评论、3：私信，默认为1。
-	 * @param int $is_batch 是否使用批量模式，0：否、1：是，默认为0。
+	 * @param int|string $id  éœ€è¦�æŸ¥è¯¢çš„å¾®å�šï¼ˆè¯„è®ºã€�ç§�ä¿¡ï¼‰IDï¼Œæ‰¹é‡�æ¨¡å¼�ä¸‹ï¼Œç”¨å�Šè§’é€—å�·åˆ†éš”ï¼Œæœ€å¤šä¸�è¶…è¿‡20ä¸ªã€‚
+	 * @param int $type  èŽ·å�–ç±»åž‹ï¼Œ1ï¼šå¾®å�šã€�2ï¼šè¯„è®ºã€�3ï¼šç§�ä¿¡ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $is_batch æ˜¯å�¦ä½¿ç”¨æ‰¹é‡�æ¨¡å¼�ï¼Œ0ï¼šå�¦ã€�1ï¼šæ˜¯ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function querymid( $id, $type = 1, $is_batch = 0 )
@@ -895,15 +895,15 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 通过微博（评论、私信）MID获取其ID
+	 * é€šè¿‡å¾®å�šï¼ˆè¯„è®ºã€�ç§�ä¿¡ï¼‰MIDèŽ·å�–å…¶ID
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/queryid statuses/queryid}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/queryid statuses/queryid}
 	 *
-	 * @param int|string $mid  需要查询的微博（评论、私信）MID，批量模式下，用半角逗号分隔，最多不超过20个。
-	 * @param int $type  获取类型，1：微博、2：评论、3：私信，默认为1。
-	 * @param int $is_batch 是否使用批量模式，0：否、1：是，默认为0。
-	 * @param int $inbox  仅对私信有效，当MID类型为私信时用此参数，0：发件箱、1：收件箱，默认为0 。
-	 * @param int $isBase62 MID是否是base62编码，0：否、1：是，默认为0。
+	 * @param int|string $mid  éœ€è¦�æŸ¥è¯¢çš„å¾®å�šï¼ˆè¯„è®ºã€�ç§�ä¿¡ï¼‰MIDï¼Œæ‰¹é‡�æ¨¡å¼�ä¸‹ï¼Œç”¨å�Šè§’é€—å�·åˆ†éš”ï¼Œæœ€å¤šä¸�è¶…è¿‡20ä¸ªã€‚
+	 * @param int $type  èŽ·å�–ç±»åž‹ï¼Œ1ï¼šå¾®å�šã€�2ï¼šè¯„è®ºã€�3ï¼šç§�ä¿¡ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $is_batch æ˜¯å�¦ä½¿ç”¨æ‰¹é‡�æ¨¡å¼�ï¼Œ0ï¼šå�¦ã€�1ï¼šæ˜¯ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $inbox  ä»…å¯¹ç§�ä¿¡æœ‰æ•ˆï¼Œå½“MIDç±»åž‹ä¸ºç§�ä¿¡æ—¶ç”¨æ­¤å�‚æ•°ï¼Œ0ï¼šå�‘ä»¶ç®±ã€�1ï¼šæ”¶ä»¶ç®±ï¼Œé»˜è®¤ä¸º0 ã€‚
+	 * @param int $isBase62 MIDæ˜¯å�¦æ˜¯base62ç¼–ç �ï¼Œ0ï¼šå�¦ã€�1ï¼šæ˜¯ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function queryid( $mid, $type = 1, $is_batch = 0, $inbox = 0, $isBase62 = 0)
@@ -918,12 +918,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 按天返回热门微博转发榜的微博列表
+	 * æŒ‰å¤©è¿”å›žçƒ­é—¨å¾®å�šè½¬å�‘æ¦œçš„å¾®å�šåˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/hot/repost_daily statuses/hot/repost_daily}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/hot/repost_daily statuses/hot/repost_daily}
 	 *
-	 * @param int $count 返回的记录条数，最大不超过50，默认为20。
-	 * @param int $base_app 是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
+	 * @param int $count è¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œæœ€å¤§ä¸�è¶…è¿‡50ï¼Œé»˜è®¤ä¸º20ã€‚
+	 * @param int $base_app æ˜¯å�¦å�ªèŽ·å�–å½“å‰�åº”ç”¨çš„æ•°æ�®ã€‚0ä¸ºå�¦ï¼ˆæ‰€æœ‰æ•°æ�®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰�åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function repost_daily( $count = 20, $base_app = 0)
@@ -935,12 +935,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 按周返回热门微博转发榜的微博列表
+	 * æŒ‰å‘¨è¿”å›žçƒ­é—¨å¾®å�šè½¬å�‘æ¦œçš„å¾®å�šåˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/hot/repost_weekly statuses/hot/repost_weekly}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/hot/repost_weekly statuses/hot/repost_weekly}
 	 *
-	 * @param int $count 返回的记录条数，最大不超过50，默认为20。
-	 * @param int $base_app 是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
+	 * @param int $count è¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œæœ€å¤§ä¸�è¶…è¿‡50ï¼Œé»˜è®¤ä¸º20ã€‚
+	 * @param int $base_app æ˜¯å�¦å�ªèŽ·å�–å½“å‰�åº”ç”¨çš„æ•°æ�®ã€‚0ä¸ºå�¦ï¼ˆæ‰€æœ‰æ•°æ�®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰�åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function repost_weekly( $count = 20,  $base_app = 0)
@@ -952,12 +952,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 按天返回热门微博评论榜的微博列表
+	 * æŒ‰å¤©è¿”å›žçƒ­é—¨å¾®å�šè¯„è®ºæ¦œçš„å¾®å�šåˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/hot/comments_daily statuses/hot/comments_daily}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/hot/comments_daily statuses/hot/comments_daily}
 	 *
-	 * @param int $count 返回的记录条数，最大不超过50，默认为20。
-	 * @param int $base_app 是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
+	 * @param int $count è¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œæœ€å¤§ä¸�è¶…è¿‡50ï¼Œé»˜è®¤ä¸º20ã€‚
+	 * @param int $base_app æ˜¯å�¦å�ªèŽ·å�–å½“å‰�åº”ç”¨çš„æ•°æ�®ã€‚0ä¸ºå�¦ï¼ˆæ‰€æœ‰æ•°æ�®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰�åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function comments_daily( $count = 20,  $base_app = 0)
@@ -969,12 +969,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 按周返回热门微博评论榜的微博列表
+	 * æŒ‰å‘¨è¿”å›žçƒ­é—¨å¾®å�šè¯„è®ºæ¦œçš„å¾®å�šåˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/hot/comments_weekly statuses/hot/comments_weekly}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/hot/comments_weekly statuses/hot/comments_weekly}
 	 *
-	 * @param int $count 返回的记录条数，最大不超过50，默认为20。
-	 * @param int $base_app 是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
+	 * @param int $count è¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œæœ€å¤§ä¸�è¶…è¿‡50ï¼Œé»˜è®¤ä¸º20ã€‚
+	 * @param int $base_app æ˜¯å�¦å�ªèŽ·å�–å½“å‰�åº”ç”¨çš„æ•°æ�®ã€‚0ä¸ºå�¦ï¼ˆæ‰€æœ‰æ•°æ�®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰�åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function comments_weekly( $count = 20, $base_app = 0)
@@ -987,15 +987,15 @@ class SaeTClientV2
 
 
 	/**
-	 * 转发一条微博信息。
+	 * è½¬å�‘ä¸€æ�¡å¾®å�šä¿¡æ�¯ã€‚
 	 *
-	 * 可加评论。为防止重复，发布的信息与最新信息一样话，将会被忽略。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/statuses/repost statuses/repost}
+	 * å�¯åŠ è¯„è®ºã€‚ä¸ºé˜²æ­¢é‡�å¤�ï¼Œå�‘å¸ƒçš„ä¿¡æ�¯ä¸Žæœ€æ–°ä¿¡æ�¯ä¸€æ ·è¯�ï¼Œå°†ä¼šè¢«å¿½ç•¥ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/repost statuses/repost}
 	 * 
 	 * @access public
-	 * @param int $sid 转发的微博ID
-	 * @param string $text 添加的评论信息。可选。
-	 * @param int $is_comment 是否在转发的同时发表评论，0：否、1：评论给当前微博、2：评论给原微博、3：都评论，默认为0。
+	 * @param int $sid è½¬å�‘çš„å¾®å�šID
+	 * @param string $text æ·»åŠ çš„è¯„è®ºä¿¡æ�¯ã€‚å�¯é€‰ã€‚
+	 * @param int $is_comment æ˜¯å�¦åœ¨è½¬å�‘çš„å�Œæ—¶å�‘è¡¨è¯„è®ºï¼Œ0ï¼šå�¦ã€�1ï¼šè¯„è®ºç»™å½“å‰�å¾®å�šã€�2ï¼šè¯„è®ºç»™åŽŸå¾®å�šã€�3ï¼šéƒ½è¯„è®ºï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function repost( $sid, $text = NULL, $is_comment = 0 )
@@ -1011,13 +1011,13 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 删除一条微博
+	 * åˆ é™¤ä¸€æ�¡å¾®å�š
 	 * 
-	 * 根据ID删除微博消息。注意：只能删除自己发布的信息。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/statuses/destroy statuses/destroy}
+	 * æ ¹æ�®IDåˆ é™¤å¾®å�šæ¶ˆæ�¯ã€‚æ³¨æ„�ï¼šå�ªèƒ½åˆ é™¤è‡ªå·±å�‘å¸ƒçš„ä¿¡æ�¯ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/destroy statuses/destroy}
 	 * 
 	 * @access public
-	 * @param int $id 要删除的微博ID
+	 * @param int $id è¦�åˆ é™¤çš„å¾®å�šID
 	 * @return array
 	 */
 	function delete( $id )
@@ -1026,13 +1026,13 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 删除一条微博
+	 * åˆ é™¤ä¸€æ�¡å¾®å�š
 	 *
-	 * 删除微博。注意：只能删除自己发布的信息。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/statuses/destroy statuses/destroy}
+	 * åˆ é™¤å¾®å�šã€‚æ³¨æ„�ï¼šå�ªèƒ½åˆ é™¤è‡ªå·±å�‘å¸ƒçš„ä¿¡æ�¯ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/destroy statuses/destroy}
 	 * 
 	 * @access public
-	 * @param int $id 要删除的微博ID
+	 * @param int $id è¦�åˆ é™¤çš„å¾®å�šID
 	 * @return array
 	 */
 	function destroy( $id )
@@ -1045,18 +1045,18 @@ class SaeTClientV2
 
 	
 	/**
-	 * 发表微博
+	 * å�‘è¡¨å¾®å�š
 	 *
-	 * 发布一条微博信息。
-	 * <br />注意：lat和long参数需配合使用，用于标记发表微博消息时所在的地理位置，只有用户设置中geo_enabled=true时候地理位置信息才有效。
-	 * <br />注意：为防止重复提交，当用户发布的微博消息与上次成功发布的微博消息内容一样时，将返回400错误，给出错误提示：“40025:Error: repeated weibo text!“。 
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/statuses/update statuses/update}
+	 * å�‘å¸ƒä¸€æ�¡å¾®å�šä¿¡æ�¯ã€‚
+	 * <br />æ³¨æ„�ï¼šlatå’Œlongå�‚æ•°éœ€é…�å�ˆä½¿ç”¨ï¼Œç”¨äºŽæ ‡è®°å�‘è¡¨å¾®å�šæ¶ˆæ�¯æ—¶æ‰€åœ¨çš„åœ°ç�†ä½�ç½®ï¼Œå�ªæœ‰ç”¨æˆ·è®¾ç½®ä¸­geo_enabled=trueæ—¶å€™åœ°ç�†ä½�ç½®ä¿¡æ�¯æ‰�æœ‰æ•ˆã€‚
+	 * <br />æ³¨æ„�ï¼šä¸ºé˜²æ­¢é‡�å¤�æ��äº¤ï¼Œå½“ç”¨æˆ·å�‘å¸ƒçš„å¾®å�šæ¶ˆæ�¯ä¸Žä¸Šæ¬¡æˆ�åŠŸå�‘å¸ƒçš„å¾®å�šæ¶ˆæ�¯å†…å®¹ä¸€æ ·æ—¶ï¼Œå°†è¿”å›ž400é”™è¯¯ï¼Œç»™å‡ºé”™è¯¯æ��ç¤ºï¼šâ€œ40025:Error: repeated weibo text!â€œã€‚ 
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/update statuses/update}
 	 * 
 	 * @access public
-	 * @param string $status 要更新的微博信息。信息内容不超过140个汉字, 为空返回400错误。
-	 * @param float $lat 纬度，发表当前微博所在的地理位置，有效范围 -90.0到+90.0, +表示北纬。可选。
-	 * @param float $long 经度。有效范围-180.0到+180.0, +表示东经。可选。
-	 * @param mixed $annotations 可选参数。元数据，主要是为了方便第三方应用记录一些适合于自己使用的信息。每条微博可以包含一个或者多个元数据。请以json字串的形式提交，字串长度不超过512个字符，或者数组方式，要求json_encode后字串长度不超过512个字符。具体内容可以自定。例如：'[{"type2":123}, {"a":"b", "c":"d"}]'或array(array("type2"=>123), array("a"=>"b", "c"=>"d"))。
+	 * @param string $status è¦�æ›´æ–°çš„å¾®å�šä¿¡æ�¯ã€‚ä¿¡æ�¯å†…å®¹ä¸�è¶…è¿‡140ä¸ªæ±‰å­—, ä¸ºç©ºè¿”å›ž400é”™è¯¯ã€‚
+	 * @param float $lat çº¬åº¦ï¼Œå�‘è¡¨å½“å‰�å¾®å�šæ‰€åœ¨çš„åœ°ç�†ä½�ç½®ï¼Œæœ‰æ•ˆèŒƒå›´ -90.0åˆ°+90.0, +è¡¨ç¤ºåŒ—çº¬ã€‚å�¯é€‰ã€‚
+	 * @param float $long ç»�åº¦ã€‚æœ‰æ•ˆèŒƒå›´-180.0åˆ°+180.0, +è¡¨ç¤ºä¸œç»�ã€‚å�¯é€‰ã€‚
+	 * @param mixed $annotations å�¯é€‰å�‚æ•°ã€‚å…ƒæ•°æ�®ï¼Œä¸»è¦�æ˜¯ä¸ºäº†æ–¹ä¾¿ç¬¬ä¸‰æ–¹åº”ç”¨è®°å½•ä¸€äº›é€‚å�ˆäºŽè‡ªå·±ä½¿ç”¨çš„ä¿¡æ�¯ã€‚æ¯�æ�¡å¾®å�šå�¯ä»¥åŒ…å�«ä¸€ä¸ªæˆ–è€…å¤šä¸ªå…ƒæ•°æ�®ã€‚è¯·ä»¥jsonå­—ä¸²çš„å½¢å¼�æ��äº¤ï¼Œå­—ä¸²é•¿åº¦ä¸�è¶…è¿‡512ä¸ªå­—ç¬¦ï¼Œæˆ–è€…æ•°ç»„æ–¹å¼�ï¼Œè¦�æ±‚json_encodeå�Žå­—ä¸²é•¿åº¦ä¸�è¶…è¿‡512ä¸ªå­—ç¬¦ã€‚å…·ä½“å†…å®¹å�¯ä»¥è‡ªå®šã€‚ä¾‹å¦‚ï¼š'[{"type2":123}, {"a":"b", "c":"d"}]'æˆ–array(array("type2"=>123), array("a"=>"b", "c"=>"d"))ã€‚
 	 * @return array
 	 */
 	function update( $status, $lat = NULL, $long = NULL, $annotations = NULL )
@@ -1079,17 +1079,17 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 发表图片微博
+	 * å�‘è¡¨å›¾ç‰‡å¾®å�š
 	 *
-	 * 发表图片微博消息。目前上传图片大小限制为<5M。 
-	 * <br />注意：lat和long参数需配合使用，用于标记发表微博消息时所在的地理位置，只有用户设置中geo_enabled=true时候地理位置信息才有效。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/statuses/upload statuses/upload}
+	 * å�‘è¡¨å›¾ç‰‡å¾®å�šæ¶ˆæ�¯ã€‚ç›®å‰�ä¸Šä¼ å›¾ç‰‡å¤§å°�é™�åˆ¶ä¸º<5Mã€‚ 
+	 * <br />æ³¨æ„�ï¼šlatå’Œlongå�‚æ•°éœ€é…�å�ˆä½¿ç”¨ï¼Œç”¨äºŽæ ‡è®°å�‘è¡¨å¾®å�šæ¶ˆæ�¯æ—¶æ‰€åœ¨çš„åœ°ç�†ä½�ç½®ï¼Œå�ªæœ‰ç”¨æˆ·è®¾ç½®ä¸­geo_enabled=trueæ—¶å€™åœ°ç�†ä½�ç½®ä¿¡æ�¯æ‰�æœ‰æ•ˆã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/upload statuses/upload}
 	 * 
 	 * @access public
-	 * @param string $status 要更新的微博信息。信息内容不超过140个汉字, 为空返回400错误。
-	 * @param string $pic_path 要发布的图片路径, 支持url。[只支持png/jpg/gif三种格式, 增加格式请修改get_image_mime方法]
-	 * @param float $lat 纬度，发表当前微博所在的地理位置，有效范围 -90.0到+90.0, +表示北纬。可选。
-	 * @param float $long 可选参数，经度。有效范围-180.0到+180.0, +表示东经。可选。
+	 * @param string $status è¦�æ›´æ–°çš„å¾®å�šä¿¡æ�¯ã€‚ä¿¡æ�¯å†…å®¹ä¸�è¶…è¿‡140ä¸ªæ±‰å­—, ä¸ºç©ºè¿”å›ž400é”™è¯¯ã€‚
+	 * @param string $pic_path è¦�å�‘å¸ƒçš„å›¾ç‰‡è·¯å¾„, æ”¯æŒ�urlã€‚[å�ªæ”¯æŒ�png/jpg/gifä¸‰ç§�æ ¼å¼�, å¢žåŠ æ ¼å¼�è¯·ä¿®æ”¹get_image_mimeæ–¹æ³•]
+	 * @param float $lat çº¬åº¦ï¼Œå�‘è¡¨å½“å‰�å¾®å�šæ‰€åœ¨çš„åœ°ç�†ä½�ç½®ï¼Œæœ‰æ•ˆèŒƒå›´ -90.0åˆ°+90.0, +è¡¨ç¤ºåŒ—çº¬ã€‚å�¯é€‰ã€‚
+	 * @param float $long å�¯é€‰å�‚æ•°ï¼Œç»�åº¦ã€‚æœ‰æ•ˆèŒƒå›´-180.0åˆ°+180.0, +è¡¨ç¤ºä¸œç»�ã€‚å�¯é€‰ã€‚
 	 * @return array
 	 */
 	function upload( $status, $pic_path, $lat = NULL, $long = NULL )
@@ -1109,12 +1109,12 @@ class SaeTClientV2
 
 
 	/**
-	 * 指定一个图片URL地址抓取后上传并同时发布一条新微博
+	 * æŒ‡å®šä¸€ä¸ªå›¾ç‰‡URLåœ°å�€æŠ“å�–å�Žä¸Šä¼ å¹¶å�Œæ—¶å�‘å¸ƒä¸€æ�¡æ–°å¾®å�š
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/statuses/upload_url_text statuses/upload_url_text}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/upload_url_text statuses/upload_url_text}
 	 *
-	 * @param string $status  要发布的微博文本内容，内容不超过140个汉字。
-	 * @param string $url    图片的URL地址，必须以http开头。
+	 * @param string $status  è¦�å�‘å¸ƒçš„å¾®å�šæ–‡æœ¬å†…å®¹ï¼Œå†…å®¹ä¸�è¶…è¿‡140ä¸ªæ±‰å­—ã€‚
+	 * @param string $url    å›¾ç‰‡çš„URLåœ°å�€ï¼Œå¿…é¡»ä»¥httpå¼€å¤´ã€‚
 	 * @return array
 	 */
 	function upload_url_text( $status,  $url )
@@ -1127,14 +1127,14 @@ class SaeTClientV2
 
 
 	/**
-	 * 获取表情列表
+	 * èŽ·å�–è¡¨æƒ…åˆ—è¡¨
 	 *
-	 * 返回新浪微博官方所有表情、魔法表情的相关信息。包括短语、表情类型、表情分类，是否热门等。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/emotions emotions}
+	 * è¿”å›žæ–°æµªå¾®å�šå®˜æ–¹æ‰€æœ‰è¡¨æƒ…ã€�é­”æ³•è¡¨æƒ…çš„ç›¸å…³ä¿¡æ�¯ã€‚åŒ…æ‹¬çŸ­è¯­ã€�è¡¨æƒ…ç±»åž‹ã€�è¡¨æƒ…åˆ†ç±»ï¼Œæ˜¯å�¦çƒ­é—¨ç­‰ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/emotions emotions}
 	 * 
 	 * @access public
-	 * @param string $type 表情类别。"face":普通表情，"ani"：魔法表情，"cartoon"：动漫表情。默认为"face"。可选。
-	 * @param string $language 语言类别，"cnname"简体，"twname"繁体。默认为"cnname"。可选
+	 * @param string $type è¡¨æƒ…ç±»åˆ«ã€‚"face":æ™®é€šè¡¨æƒ…ï¼Œ"ani"ï¼šé­”æ³•è¡¨æƒ…ï¼Œ"cartoon"ï¼šåŠ¨æ¼«è¡¨æƒ…ã€‚é»˜è®¤ä¸º"face"ã€‚å�¯é€‰ã€‚
+	 * @param string $language è¯­è¨€ç±»åˆ«ï¼Œ"cnname"ç®€ä½“ï¼Œ"twname"ç¹�ä½“ã€‚é»˜è®¤ä¸º"cnname"ã€‚å�¯é€‰
 	 * @return array
 	 */
 	function emotions( $type = "face", $language = "cnname" )
@@ -1147,16 +1147,16 @@ class SaeTClientV2
 
 
 	/**
-	 * 根据微博ID返回某条微博的评论列表
+	 * æ ¹æ�®å¾®å�šIDè¿”å›žæŸ�æ�¡å¾®å�šçš„è¯„è®ºåˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/comments/show comments/show}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/show comments/show}
 	 *
-	 * @param int $sid 需要查询的微博ID。
-	 * @param int $page 返回结果的页码，默认为1。
-	 * @param int $count 单页返回的记录条数，默认为50。
-	 * @param int $since_id 若指定此参数，则返回ID比since_id大的评论（即比since_id时间晚的评论），默认为0。
-	 * @param int $max_id  若指定此参数，则返回ID小于或等于max_id的评论，默认为0。
-	 * @param int $filter_by_author 作者筛选类型，0：全部、1：我关注的人、2：陌生人，默认为0。
+	 * @param int $sid éœ€è¦�æŸ¥è¯¢çš„å¾®å�šIDã€‚
+	 * @param int $page è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDæ¯”since_idå¤§çš„è¯„è®ºï¼ˆå�³æ¯”since_idæ—¶é—´æ™šçš„è¯„è®ºï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $max_id  è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDå°�äºŽæˆ–ç­‰äºŽmax_idçš„è¯„è®ºï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $filter_by_author ä½œè€…ç­›é€‰ç±»åž‹ï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šæˆ‘å…³æ³¨çš„äººã€�2ï¼šé™Œç”Ÿäººï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function get_comments_by_sid( $sid, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0 )
@@ -1180,15 +1180,15 @@ class SaeTClientV2
 
 
 	/**
-	 * 获取当前登录用户所发出的评论列表
+	 * èŽ·å�–å½“å‰�ç™»å½•ç”¨æˆ·æ‰€å�‘å‡ºçš„è¯„è®ºåˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/comments/by_me comments/by_me}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/by_me comments/by_me}
 	 *
-	 * @param int $since_id 若指定此参数，则返回ID比since_id大的评论（即比since_id时间晚的评论），默认为0。
-	 * @param int $max_id 若指定此参数，则返回ID小于或等于max_id的评论，默认为0。
-	 * @param int $count  单页返回的记录条数，默认为50。
-	 * @param int $page 返回结果的页码，默认为1。
-	 * @param int $filter_by_source 来源筛选类型，0：全部、1：来自微博的评论、2：来自微群的评论，默认为0。
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDæ¯”since_idå¤§çš„è¯„è®ºï¼ˆå�³æ¯”since_idæ—¶é—´æ™šçš„è¯„è®ºï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $max_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDå°�äºŽæˆ–ç­‰äºŽmax_idçš„è¯„è®ºï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $count  å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $filter_by_source æ�¥æº�ç­›é€‰ç±»åž‹ï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šæ�¥è‡ªå¾®å�šçš„è¯„è®ºã€�2ï¼šæ�¥è‡ªå¾®ç¾¤çš„è¯„è®ºï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function comments_by_me( $page = 1 , $count = 50, $since_id = 0, $max_id = 0,  $filter_by_source = 0 )
@@ -1209,16 +1209,16 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取当前登录用户所接收到的评论列表
+	 * èŽ·å�–å½“å‰�ç™»å½•ç”¨æˆ·æ‰€æŽ¥æ”¶åˆ°çš„è¯„è®ºåˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/comments/to_me comments/to_me}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/to_me comments/to_me}
 	 *
-	 * @param int $since_id 若指定此参数，则返回ID比since_id大的评论（即比since_id时间晚的评论），默认为0。
-	 * @param int $max_id  若指定此参数，则返回ID小于或等于max_id的评论，默认为0。
-	 * @param int $count 单页返回的记录条数，默认为50。
-	 * @param int $page 返回结果的页码，默认为1。
-	 * @param int $filter_by_author 作者筛选类型，0：全部、1：我关注的人、2：陌生人，默认为0。
-	 * @param int $filter_by_source 来源筛选类型，0：全部、1：来自微博的评论、2：来自微群的评论，默认为0。
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDæ¯”since_idå¤§çš„è¯„è®ºï¼ˆå�³æ¯”since_idæ—¶é—´æ™šçš„è¯„è®ºï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $max_id  è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDå°�äºŽæˆ–ç­‰äºŽmax_idçš„è¯„è®ºï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $filter_by_author ä½œè€…ç­›é€‰ç±»åž‹ï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šæˆ‘å…³æ³¨çš„äººã€�2ï¼šé™Œç”Ÿäººï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $filter_by_source æ�¥æº�ç­›é€‰ç±»åž‹ï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šæ�¥è‡ªå¾®å�šçš„è¯„è®ºã€�2ï¼šæ�¥è‡ªå¾®ç¾¤çš„è¯„è®ºï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */ 
 	function comments_to_me( $page = 1 , $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0, $filter_by_source = 0)
@@ -1240,16 +1240,16 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 最新评论(按时间)
+	 * æœ€æ–°è¯„è®º(æŒ‰æ—¶é—´)
 	 *
-	 * 返回最新n条发送及收到的评论。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/comments/timeline comments/timeline}
+	 * è¿”å›žæœ€æ–°næ�¡å�‘é€�å�Šæ”¶åˆ°çš„è¯„è®ºã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/timeline comments/timeline}
 	 * 
 	 * @access public
-	 * @param int $page 页码
-	 * @param int $count 每次返回的最大记录数，最多返回200条，默认50。
-	 * @param int $since_id 若指定此参数，则只返回ID比since_id大的评论（比since_id发表时间晚）。可选。
-	 * @param int $max_id 若指定此参数，则返回ID小于或等于max_id的评论。可选。
+	 * @param int $page é¡µç �
+	 * @param int $count æ¯�æ¬¡è¿”å›žçš„æœ€å¤§è®°å½•æ•°ï¼Œæœ€å¤šè¿”å›ž200æ�¡ï¼Œé»˜è®¤50ã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™å�ªè¿”å›žIDæ¯”since_idå¤§çš„è¯„è®ºï¼ˆæ¯”since_idå�‘è¡¨æ—¶é—´æ™šï¼‰ã€‚å�¯é€‰ã€‚
+	 * @param int $max_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDå°�äºŽæˆ–ç­‰äºŽmax_idçš„è¯„è®ºã€‚å�¯é€‰ã€‚
 	 * @return array
 	 */
 	function comments_timeline( $page = 1, $count = 50, $since_id = 0, $max_id = 0 )
@@ -1269,16 +1269,16 @@ class SaeTClientV2
 
 
 	/**
-	 * 获取最新的提到当前登录用户的评论，即@我的评论
+	 * èŽ·å�–æœ€æ–°çš„æ��åˆ°å½“å‰�ç™»å½•ç”¨æˆ·çš„è¯„è®ºï¼Œå�³@æˆ‘çš„è¯„è®º
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/comments/mentions comments/mentions}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/mentions comments/mentions}
 	 *
-	 * @param int $since_id 若指定此参数，则返回ID比since_id大的评论（即比since_id时间晚的评论），默认为0。
-	 * @param int $max_id  若指定此参数，则返回ID小于或等于max_id的评论，默认为0。
-	 * @param int $count 单页返回的记录条数，默认为50。
-	 * @param int $page 返回结果的页码，默认为1。
-	 * @param int $filter_by_author  作者筛选类型，0：全部、1：我关注的人、2：陌生人，默认为0。
-	 * @param int $filter_by_source 来源筛选类型，0：全部、1：来自微博的评论、2：来自微群的评论，默认为0。
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDæ¯”since_idå¤§çš„è¯„è®ºï¼ˆå�³æ¯”since_idæ—¶é—´æ™šçš„è¯„è®ºï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $max_id  è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDå°�äºŽæˆ–ç­‰äºŽmax_idçš„è¯„è®ºï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $filter_by_author  ä½œè€…ç­›é€‰ç±»åž‹ï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šæˆ‘å…³æ³¨çš„äººã€�2ï¼šé™Œç”Ÿäººï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $filter_by_source æ�¥æº�ç­›é€‰ç±»åž‹ï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šæ�¥è‡ªå¾®å�šçš„è¯„è®ºã€�2ï¼šæ�¥è‡ªå¾®ç¾¤çš„è¯„è®ºï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */ 
 	function comments_mentions( $page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0, $filter_by_source = 0)
@@ -1295,11 +1295,11 @@ class SaeTClientV2
 
 
 	/**
-	 * 根据评论ID批量返回评论信息
+	 * æ ¹æ�®è¯„è®ºIDæ‰¹é‡�è¿”å›žè¯„è®ºä¿¡æ�¯
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/comments/show_batch comments/show_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/show_batch comments/show_batch}
 	 *
-	 * @param string $cids 需要查询的批量评论ID，用半角逗号分隔，最大50
+	 * @param string $cids éœ€è¦�æŸ¥è¯¢çš„æ‰¹é‡�è¯„è®ºIDï¼Œç”¨å�Šè§’é€—å�·åˆ†éš”ï¼Œæœ€å¤§50
 	 * @return array
 	 */
 	function comments_show_batch( $cids )
@@ -1318,13 +1318,13 @@ class SaeTClientV2
 
 
 	/**
-	 * 对一条微博进行评论
+	 * å¯¹ä¸€æ�¡å¾®å�šè¿›è¡Œè¯„è®º
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/comments/create comments/create}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/create comments/create}
 	 *
-	 * @param string $comment 评论内容，内容不超过140个汉字。
-	 * @param int $id 需要评论的微博ID。
-	 * @param int $comment_ori 当评论转发微博时，是否评论给原微博，0：否、1：是，默认为0。
+	 * @param string $comment è¯„è®ºå†…å®¹ï¼Œå†…å®¹ä¸�è¶…è¿‡140ä¸ªæ±‰å­—ã€‚
+	 * @param int $id éœ€è¦�è¯„è®ºçš„å¾®å�šIDã€‚
+	 * @param int $comment_ori å½“è¯„è®ºè½¬å�‘å¾®å�šæ—¶ï¼Œæ˜¯å�¦è¯„è®ºç»™åŽŸå¾®å�šï¼Œ0ï¼šå�¦ã€�1ï¼šæ˜¯ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function send_comment( $id , $comment , $comment_ori = 0)
@@ -1338,13 +1338,13 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 删除当前用户的微博评论信息。
+	 * åˆ é™¤å½“å‰�ç”¨æˆ·çš„å¾®å�šè¯„è®ºä¿¡æ�¯ã€‚
 	 *
-	 * 注意：只能删除自己发布的评论，发部微博的用户不可以删除其他人的评论。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/statuses/comment_destroy statuses/comment_destroy}
+	 * æ³¨æ„�ï¼šå�ªèƒ½åˆ é™¤è‡ªå·±å�‘å¸ƒçš„è¯„è®ºï¼Œå�‘éƒ¨å¾®å�šçš„ç”¨æˆ·ä¸�å�¯ä»¥åˆ é™¤å…¶ä»–äººçš„è¯„è®ºã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/comment_destroy statuses/comment_destroy}
 	 * 
 	 * @access public
-	 * @param int $cid 要删除的评论id
+	 * @param int $cid è¦�åˆ é™¤çš„è¯„è®ºid
 	 * @return array
 	 */
 	function comment_destroy( $cid )
@@ -1356,13 +1356,13 @@ class SaeTClientV2
 
 
 	/**
-	 * 根据评论ID批量删除评论
+	 * æ ¹æ�®è¯„è®ºIDæ‰¹é‡�åˆ é™¤è¯„è®º
 	 *
-	 * 注意：只能删除自己发布的评论，发部微博的用户不可以删除其他人的评论。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/comments/destroy_batch comments/destroy_batch}
+	 * æ³¨æ„�ï¼šå�ªèƒ½åˆ é™¤è‡ªå·±å�‘å¸ƒçš„è¯„è®ºï¼Œå�‘éƒ¨å¾®å�šçš„ç”¨æˆ·ä¸�å�¯ä»¥åˆ é™¤å…¶ä»–äººçš„è¯„è®ºã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/destroy_batch comments/destroy_batch}
 	 *
 	 * @access public
-	 * @param string $ids 需要删除的评论ID，用半角逗号隔开，最多20个。
+	 * @param string $ids éœ€è¦�åˆ é™¤çš„è¯„è®ºIDï¼Œç”¨å�Šè§’é€—å�·éš”å¼€ï¼Œæœ€å¤š20ä¸ªã€‚
 	 * @return array
 	 */
 	function comment_destroy_batch( $ids )
@@ -1381,17 +1381,17 @@ class SaeTClientV2
 
 
 	/**
-	 * 回复一条评论
+	 * å›žå¤�ä¸€æ�¡è¯„è®º
 	 *
-	 * 为防止重复，发布的信息与最后一条评论/回复信息一样话，将会被忽略。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/comments/reply comments/reply}
+	 * ä¸ºé˜²æ­¢é‡�å¤�ï¼Œå�‘å¸ƒçš„ä¿¡æ�¯ä¸Žæœ€å�Žä¸€æ�¡è¯„è®º/å›žå¤�ä¿¡æ�¯ä¸€æ ·è¯�ï¼Œå°†ä¼šè¢«å¿½ç•¥ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/reply comments/reply}
 	 * 
 	 * @access public
-	 * @param int $sid 微博id
-	 * @param string $text 评论内容。
-	 * @param int $cid 评论id
-	 * @param int $without_mention 1：回复中不自动加入“回复@用户名”，0：回复中自动加入“回复@用户名”.默认为0.
-     * @param int $comment_ori	  当评论转发微博时，是否评论给原微博，0：否、1：是，默认为0。
+	 * @param int $sid å¾®å�šid
+	 * @param string $text è¯„è®ºå†…å®¹ã€‚
+	 * @param int $cid è¯„è®ºid
+	 * @param int $without_mention 1ï¼šå›žå¤�ä¸­ä¸�è‡ªåŠ¨åŠ å…¥â€œå›žå¤�@ç”¨æˆ·å��â€�ï¼Œ0ï¼šå›žå¤�ä¸­è‡ªåŠ¨åŠ å…¥â€œå›žå¤�@ç”¨æˆ·å��â€�.é»˜è®¤ä¸º0.
+     * @param int $comment_ori	  å½“è¯„è®ºè½¬å�‘å¾®å�šæ—¶ï¼Œæ˜¯å�¦è¯„è®ºç»™åŽŸå¾®å�šï¼Œ0ï¼šå�¦ã€�1ï¼šæ˜¯ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function reply( $sid, $text, $cid, $without_mention = 0, $comment_ori = 0 )
@@ -1410,13 +1410,13 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 根据用户UID或昵称获取用户资料
+	 * æ ¹æ�®ç”¨æˆ·UIDæˆ–æ˜µç§°èŽ·å�–ç”¨æˆ·èµ„æ–™
 	 *
-	 * 按用户UID或昵称返回用户资料，同时也将返回用户的最新发布的微博。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/users/show users/show}
+	 * æŒ‰ç”¨æˆ·UIDæˆ–æ˜µç§°è¿”å›žç”¨æˆ·èµ„æ–™ï¼Œå�Œæ—¶ä¹Ÿå°†è¿”å›žç”¨æˆ·çš„æœ€æ–°å�‘å¸ƒçš„å¾®å�šã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/users/show users/show}
 	 * 
 	 * @access public
-	 * @param int  $uid 用户UID。
+	 * @param int  $uid ç”¨æˆ·UIDã€‚
 	 * @return array
 	 */
 	function show_user_by_id( $uid )
@@ -1431,13 +1431,13 @@ class SaeTClientV2
 	}
 	
 	/**
-	 * 根据用户UID或昵称获取用户资料
+	 * æ ¹æ�®ç”¨æˆ·UIDæˆ–æ˜µç§°èŽ·å�–ç”¨æˆ·èµ„æ–™
 	 *
-	 * 按用户UID或昵称返回用户资料，同时也将返回用户的最新发布的微博。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/users/show users/show}
+	 * æŒ‰ç”¨æˆ·UIDæˆ–æ˜µç§°è¿”å›žç”¨æˆ·èµ„æ–™ï¼Œå�Œæ—¶ä¹Ÿå°†è¿”å›žç”¨æˆ·çš„æœ€æ–°å�‘å¸ƒçš„å¾®å�šã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/users/show users/show}
 	 * 
 	 * @access public
-	 * @param string  $screen_name 用户UID。
+	 * @param string  $screen_name ç”¨æˆ·UIDã€‚
 	 * @return array
 	 */
 	function show_user_by_name( $screen_name )
@@ -1449,12 +1449,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 通过个性化域名获取用户资料以及用户最新的一条微博
+	 * é€šè¿‡ä¸ªæ€§åŒ–åŸŸå��èŽ·å�–ç”¨æˆ·èµ„æ–™ä»¥å�Šç”¨æˆ·æœ€æ–°çš„ä¸€æ�¡å¾®å�š
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/users/domain_show users/domain_show}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/users/domain_show users/domain_show}
 	 * 
 	 * @access public
-	 * @param mixed $domain 用户个性域名。例如：lazypeople，而不是http://weibo.com/lazypeople
+	 * @param mixed $domain ç”¨æˆ·ä¸ªæ€§åŸŸå��ã€‚ä¾‹å¦‚ï¼šlazypeopleï¼Œè€Œä¸�æ˜¯http://weibo.com/lazypeople
 	 * @return array
 	 */
 	function domain_show( $domain )
@@ -1465,11 +1465,11 @@ class SaeTClientV2
 	}
 
 	 /**
-	 * 批量获取用户信息按uids
+	 * æ‰¹é‡�èŽ·å�–ç”¨æˆ·ä¿¡æ�¯æŒ‰uids
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/users/show_batch users/show_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/users/show_batch users/show_batch}
 	 *
-	 * @param string $uids 需要查询的用户ID，用半角逗号分隔，一次最多20个。
+	 * @param string $uids éœ€è¦�æŸ¥è¯¢çš„ç”¨æˆ·IDï¼Œç”¨å�Šè§’é€—å�·åˆ†éš”ï¼Œä¸€æ¬¡æœ€å¤š20ä¸ªã€‚
 	 * @return array
 	 */
 	function users_show_batch_by_id( $uids )
@@ -1487,11 +1487,11 @@ class SaeTClientV2
 	}
 	
 	/**
-	 * 批量获取用户信息按screen_name
+	 * æ‰¹é‡�èŽ·å�–ç”¨æˆ·ä¿¡æ�¯æŒ‰screen_name
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/users/show_batch users/show_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/users/show_batch users/show_batch}
 	 *
-	 * @param string  $screen_name 需要查询的用户昵称，用半角逗号分隔，一次最多20个。
+	 * @param string  $screen_name éœ€è¦�æŸ¥è¯¢çš„ç”¨æˆ·æ˜µç§°ï¼Œç”¨å�Šè§’é€—å�·åˆ†éš”ï¼Œä¸€æ¬¡æœ€å¤š20ä¸ªã€‚
 	 * @return array
 	 */
 	function users_show_batch_by_name( $screen_name )
@@ -1507,15 +1507,15 @@ class SaeTClientV2
 
 
 	/**
-	 * 获取用户的关注列表
+	 * èŽ·å�–ç”¨æˆ·çš„å…³æ³¨åˆ—è¡¨
 	 *
-	 * 如果没有提供cursor参数，将只返回最前面的5000个关注id
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/friendships/friends friendships/friends}
+	 * å¦‚æžœæ²¡æœ‰æ��ä¾›cursorå�‚æ•°ï¼Œå°†å�ªè¿”å›žæœ€å‰�é�¢çš„5000ä¸ªå…³æ³¨id
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends friendships/friends}
 	 * 
 	 * @access public
-	 * @param int $cursor 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
-	 * @param int $count 单页返回的记录条数，默认为50，最大不超过200。
-	 * @param int $uid  要获取的用户的ID。
+	 * @param int $cursor è¿”å›žç»“æžœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›žå€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ï¼Œæœ€å¤§ä¸�è¶…è¿‡200ã€‚
+	 * @param int $uid  è¦�èŽ·å�–çš„ç”¨æˆ·çš„IDã€‚
 	 * @return array
 	 */
 	function friends_by_id( $uid, $cursor = 0, $count = 50 )
@@ -1530,15 +1530,15 @@ class SaeTClientV2
 	
 	
 	/**
-	 * 获取用户的关注列表
+	 * èŽ·å�–ç”¨æˆ·çš„å…³æ³¨åˆ—è¡¨
 	 *
-	 * 如果没有提供cursor参数，将只返回最前面的5000个关注id
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/friendships/friends friendships/friends}
+	 * å¦‚æžœæ²¡æœ‰æ��ä¾›cursorå�‚æ•°ï¼Œå°†å�ªè¿”å›žæœ€å‰�é�¢çš„5000ä¸ªå…³æ³¨id
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends friendships/friends}
 	 * 
 	 * @access public
-	 * @param int $cursor 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
-	 * @param int $count 单页返回的记录条数，默认为50，最大不超过200。
-	 * @param string $screen_name  要获取的用户的 screen_name
+	 * @param int $cursor è¿”å›žç»“æžœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›žå€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ï¼Œæœ€å¤§ä¸�è¶…è¿‡200ã€‚
+	 * @param string $screen_name  è¦�èŽ·å�–çš„ç”¨æˆ·çš„ screen_name
 	 * @return array
 	 */
 	function friends_by_name( $screen_name, $cursor = 0, $count = 50 )
@@ -1552,14 +1552,14 @@ class SaeTClientV2
 
 
 	/**
-	 * 获取两个用户之间的共同关注人列表
+	 * èŽ·å�–ä¸¤ä¸ªç”¨æˆ·ä¹‹é—´çš„å…±å�Œå…³æ³¨äººåˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/friendships/friends/in_common friendships/friends/in_common}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends/in_common friendships/friends/in_common}
 	 *
-	 * @param int $uid  需要获取共同关注关系的用户UID
-	 * @param int $suid  需要获取共同关注关系的用户UID，默认为当前登录用户。
-	 * @param int $count  单页返回的记录条数，默认为50。
-	 * @param int $page  返回结果的页码，默认为1。
+	 * @param int $uid  éœ€è¦�èŽ·å�–å…±å�Œå…³æ³¨å…³ç³»çš„ç”¨æˆ·UID
+	 * @param int $suid  éœ€è¦�èŽ·å�–å…±å�Œå…³æ³¨å…³ç³»çš„ç”¨æˆ·UIDï¼Œé»˜è®¤ä¸ºå½“å‰�ç™»å½•ç”¨æˆ·ã€‚
+	 * @param int $count  å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page  è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚
 	 * @return array
 	 */
 	function friends_in_common( $uid, $suid = NULL, $page = 1, $count = 50 )
@@ -1573,14 +1573,14 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取用户的双向关注列表，即互粉列表
+	 * èŽ·å�–ç”¨æˆ·çš„å�Œå�‘å…³æ³¨åˆ—è¡¨ï¼Œå�³äº’ç²‰åˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/friendships/friends/bilateral friendships/friends/bilateral}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends/bilateral friendships/friends/bilateral}
 	 *
-	 * @param int $uid  需要获取双向关注列表的用户UID。
-	 * @param int $count  单页返回的记录条数，默认为50。
-	 * @param int $page  返回结果的页码，默认为1。
-	 * @param int $sort  排序类型，0：按关注时间最近排序，默认为0。
+	 * @param int $uid  éœ€è¦�èŽ·å�–å�Œå�‘å…³æ³¨åˆ—è¡¨çš„ç”¨æˆ·UIDã€‚
+	 * @param int $count  å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page  è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $sort  æŽ’åº�ç±»åž‹ï¼Œ0ï¼šæŒ‰å…³æ³¨æ—¶é—´æœ€è¿‘æŽ’åº�ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 **/
 	function bilateral( $uid, $page = 1, $count = 50, $sort = 0 )
@@ -1594,14 +1594,14 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取用户的双向关注uid列表
+	 * èŽ·å�–ç”¨æˆ·çš„å�Œå�‘å…³æ³¨uidåˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/friendships/friends/bilateral/ids friendships/friends/bilateral/ids}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends/bilateral/ids friendships/friends/bilateral/ids}
 	 *
-	 * @param int $uid  需要获取双向关注列表的用户UID。
-	 * @param int $count 单页返回的记录条数，默认为50。
-	 * @param int $page  返回结果的页码，默认为1。
-	 * @param int $sort  排序类型，0：按关注时间最近排序，默认为0。
+	 * @param int $uid  éœ€è¦�èŽ·å�–å�Œå�‘å…³æ³¨åˆ—è¡¨çš„ç”¨æˆ·UIDã€‚
+	 * @param int $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page  è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $sort  æŽ’åº�ç±»åž‹ï¼Œ0ï¼šæŒ‰å…³æ³¨æ—¶é—´æœ€è¿‘æŽ’åº�ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 **/
 	function bilateral_ids( $uid, $page = 1, $count = 50, $sort = 0)
@@ -1615,15 +1615,15 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取用户的关注列表uid
+	 * èŽ·å�–ç”¨æˆ·çš„å…³æ³¨åˆ—è¡¨uid
 	 *
-	 * 如果没有提供cursor参数，将只返回最前面的5000个关注id
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/friendships/friends/ids friendships/friends/ids}
+	 * å¦‚æžœæ²¡æœ‰æ��ä¾›cursorå�‚æ•°ï¼Œå°†å�ªè¿”å›žæœ€å‰�é�¢çš„5000ä¸ªå…³æ³¨id
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends/ids friendships/friends/ids}
 	 * 
 	 * @access public
-	 * @param int $cursor 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
-	 * @param int $count 每次返回的最大记录数（即页面大小），不大于5000, 默认返回500。
-	 * @param int $uid 要获取的用户 UID，默认为当前用户
+	 * @param int $cursor è¿”å›žç»“æžœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›žå€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $count æ¯�æ¬¡è¿”å›žçš„æœ€å¤§è®°å½•æ•°ï¼ˆå�³é¡µé�¢å¤§å°�ï¼‰ï¼Œä¸�å¤§äºŽ5000, é»˜è®¤è¿”å›ž500ã€‚
+	 * @param int $uid è¦�èŽ·å�–çš„ç”¨æˆ· UIDï¼Œé»˜è®¤ä¸ºå½“å‰�ç”¨æˆ·
 	 * @return array
 	 */
 	function friends_ids_by_id( $uid, $cursor = 0, $count = 500 )
@@ -1637,15 +1637,15 @@ class SaeTClientV2
 	}
 	
 	/**
-	 * 获取用户的关注列表uid
+	 * èŽ·å�–ç”¨æˆ·çš„å…³æ³¨åˆ—è¡¨uid
 	 *
-	 * 如果没有提供cursor参数，将只返回最前面的5000个关注id
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/friendships/friends/ids friendships/friends/ids}
+	 * å¦‚æžœæ²¡æœ‰æ��ä¾›cursorå�‚æ•°ï¼Œå°†å�ªè¿”å›žæœ€å‰�é�¢çš„5000ä¸ªå…³æ³¨id
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends/ids friendships/friends/ids}
 	 * 
 	 * @access public
-	 * @param int $cursor 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
-	 * @param int $count 每次返回的最大记录数（即页面大小），不大于5000, 默认返回500。
-	 * @param string $screen_name 要获取的用户的 screen_name，默认为当前用户
+	 * @param int $cursor è¿”å›žç»“æžœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›žå€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $count æ¯�æ¬¡è¿”å›žçš„æœ€å¤§è®°å½•æ•°ï¼ˆå�³é¡µé�¢å¤§å°�ï¼‰ï¼Œä¸�å¤§äºŽ5000, é»˜è®¤è¿”å›ž500ã€‚
+	 * @param string $screen_name è¦�èŽ·å�–çš„ç”¨æˆ·çš„ screen_nameï¼Œé»˜è®¤ä¸ºå½“å‰�ç”¨æˆ·
 	 * @return array
 	 */
 	function friends_ids_by_name( $screen_name, $cursor = 0, $count = 500 )
@@ -1659,11 +1659,11 @@ class SaeTClientV2
 
 
 	/**
-	 * 批量获取当前登录用户的关注人的备注信息
+	 * æ‰¹é‡�èŽ·å�–å½“å‰�ç™»å½•ç”¨æˆ·çš„å…³æ³¨äººçš„å¤‡æ³¨ä¿¡æ�¯
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/friendships/friends/remark_batch friendships/friends/remark_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends/remark_batch friendships/friends/remark_batch}
 	 *
-	 * @param string $uids  需要获取备注的用户UID，用半角逗号分隔，最多不超过50个。
+	 * @param string $uids  éœ€è¦�èŽ·å�–å¤‡æ³¨çš„ç”¨æˆ·UIDï¼Œç”¨å�Šè§’é€—å�·åˆ†éš”ï¼Œæœ€å¤šä¸�è¶…è¿‡50ä¸ªã€‚
 	 * @return array
 	 **/
 	function friends_remark_batch( $uids )
@@ -1681,13 +1681,13 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取用户的粉丝列表
+	 * èŽ·å�–ç”¨æˆ·çš„ç²‰ä¸�åˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/friendships/followers friendships/followers}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/followers friendships/followers}
 	 *
-	 * @param int $uid  需要查询的用户UID
-	 * @param int $count 单页返回的记录条数，默认为50，最大不超过200。
-	 * @param int $cursor false 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
+	 * @param int $uid  éœ€è¦�æŸ¥è¯¢çš„ç”¨æˆ·UID
+	 * @param int $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ï¼Œæœ€å¤§ä¸�è¶…è¿‡200ã€‚
+	 * @param int $cursor false è¿”å›žç»“æžœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›žå€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 **/
 	function followers_by_id( $uid , $cursor = 0 , $count = 50)
@@ -1701,13 +1701,13 @@ class SaeTClientV2
 	}
 	
 	/**
-	 * 获取用户的粉丝列表
+	 * èŽ·å�–ç”¨æˆ·çš„ç²‰ä¸�åˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/friendships/followers friendships/followers}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/followers friendships/followers}
 	 *
-	 * @param string $screen_name  需要查询的用户的昵称
-	 * @param int  $count 单页返回的记录条数，默认为50，最大不超过200。
-	 * @param int  $cursor false 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
+	 * @param string $screen_name  éœ€è¦�æŸ¥è¯¢çš„ç”¨æˆ·çš„æ˜µç§°
+	 * @param int  $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ï¼Œæœ€å¤§ä¸�è¶…è¿‡200ã€‚
+	 * @param int  $cursor false è¿”å›žç»“æžœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›žå€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 **/
 	function followers_by_name( $screen_name, $cursor = 0 , $count = 50 )
@@ -1720,13 +1720,13 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取用户的粉丝列表uid
+	 * èŽ·å�–ç”¨æˆ·çš„ç²‰ä¸�åˆ—è¡¨uid
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/friendships/followers friendships/followers}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/followers friendships/followers}
 	 *
-	 * @param int $uid 需要查询的用户UID
-	 * @param int $count 单页返回的记录条数，默认为50，最大不超过200。
-	 * @param int $cursor 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
+	 * @param int $uid éœ€è¦�æŸ¥è¯¢çš„ç”¨æˆ·UID
+	 * @param int $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ï¼Œæœ€å¤§ä¸�è¶…è¿‡200ã€‚
+	 * @param int $cursor è¿”å›žç»“æžœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›žå€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 **/
 	function followers_ids_by_id( $uid, $cursor = 0 , $count = 50 )
@@ -1740,13 +1740,13 @@ class SaeTClientV2
 	}
 	
 	/**
-	 * 获取用户的粉丝列表uid
+	 * èŽ·å�–ç”¨æˆ·çš„ç²‰ä¸�åˆ—è¡¨uid
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/friendships/followers friendships/followers}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/followers friendships/followers}
 	 *
-	 * @param string $screen_name 需要查询的用户screen_name
-	 * @param int $count 单页返回的记录条数，默认为50，最大不超过200。
-	 * @param int $cursor 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
+	 * @param string $screen_name éœ€è¦�æŸ¥è¯¢çš„ç”¨æˆ·screen_name
+	 * @param int $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ï¼Œæœ€å¤§ä¸�è¶…è¿‡200ã€‚
+	 * @param int $cursor è¿”å›žç»“æžœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›žå€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 **/
 	function followers_ids_by_name( $screen_name, $cursor = 0 , $count = 50 )
@@ -1759,12 +1759,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取优质粉丝
+	 * èŽ·å�–ä¼˜è´¨ç²‰ä¸�
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/friendships/followers/active friendships/followers/active}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/followers/active friendships/followers/active}
 	 *
-	 * @param int $uid 需要查询的用户UID。
-	 * @param int $count 返回的记录条数，默认为20，最大不超过200。
+	 * @param int $uid éœ€è¦�æŸ¥è¯¢çš„ç”¨æˆ·UIDã€‚
+	 * @param int $count è¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º20ï¼Œæœ€å¤§ä¸�è¶…è¿‡200ã€‚
      * @return array
 	 **/
 	function followers_active( $uid,  $count = 20)
@@ -1778,13 +1778,13 @@ class SaeTClientV2
 
 
 	/**
-	 * 获取当前登录用户的关注人中又关注了指定用户的用户列表
+	 * èŽ·å�–å½“å‰�ç™»å½•ç”¨æˆ·çš„å…³æ³¨äººä¸­å�ˆå…³æ³¨äº†æŒ‡å®šç”¨æˆ·çš„ç”¨æˆ·åˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/friendships/friends_chain/followers friendships/friends_chain/followers}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends_chain/followers friendships/friends_chain/followers}
 	 *
-	 * @param int $uid 指定的关注目标用户UID。
-	 * @param int $count 单页返回的记录条数，默认为50。
-	 * @param int $page 返回结果的页码，默认为1。
+	 * @param int $uid æŒ‡å®šçš„å…³æ³¨ç›®æ ‡ç”¨æˆ·UIDã€‚
+	 * @param int $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚
 	 * @return array
 	 **/
 	function friends_chain_followers( $uid, $page = 1, $count = 50 )
@@ -1798,14 +1798,14 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 返回两个用户关系的详细情况
+	 * è¿”å›žä¸¤ä¸ªç”¨æˆ·å…³ç³»çš„è¯¦ç»†æƒ…å†µ
 	 *
-	 * 如果源用户或目的用户不存在，将返回http的400错误
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/friendships/show friendships/show}
+	 * å¦‚æžœæº�ç”¨æˆ·æˆ–ç›®çš„ç”¨æˆ·ä¸�å­˜åœ¨ï¼Œå°†è¿”å›žhttpçš„400é”™è¯¯
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/show friendships/show}
 	 * 
 	 * @access public
-	 * @param mixed $target_id 目标用户UID
-	 * @param mixed $source_id 源用户UID，可选，默认为当前的用户
+	 * @param mixed $target_id ç›®æ ‡ç”¨æˆ·UID
+	 * @param mixed $source_id æº�ç”¨æˆ·UIDï¼Œå�¯é€‰ï¼Œé»˜è®¤ä¸ºå½“å‰�çš„ç”¨æˆ·
 	 * @return array
 	 */
 	function is_followed_by_id( $target_id, $source_id = NULL )
@@ -1823,14 +1823,14 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 返回两个用户关系的详细情况
+	 * è¿”å›žä¸¤ä¸ªç”¨æˆ·å…³ç³»çš„è¯¦ç»†æƒ…å†µ
 	 *
-	 * 如果源用户或目的用户不存在，将返回http的400错误
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/friendships/show friendships/show}
+	 * å¦‚æžœæº�ç”¨æˆ·æˆ–ç›®çš„ç”¨æˆ·ä¸�å­˜åœ¨ï¼Œå°†è¿”å›žhttpçš„400é”™è¯¯
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/show friendships/show}
 	 * 
 	 * @access public
-	 * @param mixed $target_name 目标用户的微博昵称
-	 * @param mixed $source_name 源用户的微博昵称，可选，默认为当前的用户
+	 * @param mixed $target_name ç›®æ ‡ç”¨æˆ·çš„å¾®å�šæ˜µç§°
+	 * @param mixed $source_name æº�ç”¨æˆ·çš„å¾®å�šæ˜µç§°ï¼Œå�¯é€‰ï¼Œé»˜è®¤ä¸ºå½“å‰�çš„ç”¨æˆ·
 	 * @return array
 	 */
 	function is_followed_by_name( $target_name, $source_name = NULL )
@@ -1846,13 +1846,13 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 关注一个用户。
+	 * å…³æ³¨ä¸€ä¸ªç”¨æˆ·ã€‚
 	 *
-	 * 成功则返回关注人的资料，目前最多关注2000人，失败则返回一条字符串的说明。如果已经关注了此人，则返回http 403的状态。关注不存在的ID将返回400。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/friendships/create friendships/create}
+	 * æˆ�åŠŸåˆ™è¿”å›žå…³æ³¨äººçš„èµ„æ–™ï¼Œç›®å‰�æœ€å¤šå…³æ³¨2000äººï¼Œå¤±è´¥åˆ™è¿”å›žä¸€æ�¡å­—ç¬¦ä¸²çš„è¯´æ˜Žã€‚å¦‚æžœå·²ç»�å…³æ³¨äº†æ­¤äººï¼Œåˆ™è¿”å›žhttp 403çš„çŠ¶æ€�ã€‚å…³æ³¨ä¸�å­˜åœ¨çš„IDå°†è¿”å›ž400ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/create friendships/create}
 	 * 
 	 * @access public
-	 * @param int $uid 要关注的用户UID
+	 * @param int $uid è¦�å…³æ³¨çš„ç”¨æˆ·UID
 	 * @return array
 	 */
 	function follow_by_id( $uid )
@@ -1864,13 +1864,13 @@ class SaeTClientV2
 	}
 	
 	/**
-	 * 关注一个用户。
+	 * å…³æ³¨ä¸€ä¸ªç”¨æˆ·ã€‚
 	 *
-	 * 成功则返回关注人的资料，目前的最多关注2000人，失败则返回一条字符串的说明。如果已经关注了此人，则返回http 403的状态。关注不存在的ID将返回400。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/friendships/create friendships/create}
+	 * æˆ�åŠŸåˆ™è¿”å›žå…³æ³¨äººçš„èµ„æ–™ï¼Œç›®å‰�çš„æœ€å¤šå…³æ³¨2000äººï¼Œå¤±è´¥åˆ™è¿”å›žä¸€æ�¡å­—ç¬¦ä¸²çš„è¯´æ˜Žã€‚å¦‚æžœå·²ç»�å…³æ³¨äº†æ­¤äººï¼Œåˆ™è¿”å›žhttp 403çš„çŠ¶æ€�ã€‚å…³æ³¨ä¸�å­˜åœ¨çš„IDå°†è¿”å›ž400ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/create friendships/create}
 	 * 
 	 * @access public
-	 * @param string $screen_name 要关注的用户昵称
+	 * @param string $screen_name è¦�å…³æ³¨çš„ç”¨æˆ·æ˜µç§°
 	 * @return array
 	 */
 	function follow_by_name( $screen_name )
@@ -1882,11 +1882,11 @@ class SaeTClientV2
 
 
 	/**
-	 * 根据用户UID批量关注用户
+	 * æ ¹æ�®ç”¨æˆ·UIDæ‰¹é‡�å…³æ³¨ç”¨æˆ·
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/friendships/create_batch friendships/create_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/create_batch friendships/create_batch}
 	 *
-	 * @param string $uids 要关注的用户UID，用半角逗号分隔，最多不超过20个。
+	 * @param string $uids è¦�å…³æ³¨çš„ç”¨æˆ·UIDï¼Œç”¨å�Šè§’é€—å�·åˆ†éš”ï¼Œæœ€å¤šä¸�è¶…è¿‡20ä¸ªã€‚
 	 * @return array
 	 */
 	function follow_create_batch( $uids )
@@ -1904,13 +1904,13 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 取消关注某用户
+	 * å�–æ¶ˆå…³æ³¨æŸ�ç”¨æˆ·
 	 *
-	 * 取消关注某用户。成功则返回被取消关注人的资料，失败则返回一条字符串的说明。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/friendships/destroy friendships/destroy}
+	 * å�–æ¶ˆå…³æ³¨æŸ�ç”¨æˆ·ã€‚æˆ�åŠŸåˆ™è¿”å›žè¢«å�–æ¶ˆå…³æ³¨äººçš„èµ„æ–™ï¼Œå¤±è´¥åˆ™è¿”å›žä¸€æ�¡å­—ç¬¦ä¸²çš„è¯´æ˜Žã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/destroy friendships/destroy}
 	 * 
 	 * @access public
-	 * @param int $uid 要取消关注的用户UID
+	 * @param int $uid è¦�å�–æ¶ˆå…³æ³¨çš„ç”¨æˆ·UID
 	 * @return array
 	 */
 	function unfollow_by_id( $uid )
@@ -1922,13 +1922,13 @@ class SaeTClientV2
 	}
 	
 	/**
-	 * 取消关注某用户
+	 * å�–æ¶ˆå…³æ³¨æŸ�ç”¨æˆ·
 	 *
-	 * 取消关注某用户。成功则返回被取消关注人的资料，失败则返回一条字符串的说明。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/friendships/destroy friendships/destroy}
+	 * å�–æ¶ˆå…³æ³¨æŸ�ç”¨æˆ·ã€‚æˆ�åŠŸåˆ™è¿”å›žè¢«å�–æ¶ˆå…³æ³¨äººçš„èµ„æ–™ï¼Œå¤±è´¥åˆ™è¿”å›žä¸€æ�¡å­—ç¬¦ä¸²çš„è¯´æ˜Žã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/destroy friendships/destroy}
 	 * 
 	 * @access public
-	 * @param string $screen_name 要取消关注的用户昵称
+	 * @param string $screen_name è¦�å�–æ¶ˆå…³æ³¨çš„ç”¨æˆ·æ˜µç§°
 	 * @return array
 	 */
 	function unfollow_by_name( $screen_name )
@@ -1939,14 +1939,14 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 更新当前登录用户所关注的某个好友的备注信息
+	 * æ›´æ–°å½“å‰�ç™»å½•ç”¨æˆ·æ‰€å…³æ³¨çš„æŸ�ä¸ªå¥½å�‹çš„å¤‡æ³¨ä¿¡æ�¯
 	 *
-	 * 只能修改当前登录用户所关注的用户的备注信息。否则将给出400错误。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/friendships/remark/update friendships/remark/update}
+	 * å�ªèƒ½ä¿®æ”¹å½“å‰�ç™»å½•ç”¨æˆ·æ‰€å…³æ³¨çš„ç”¨æˆ·çš„å¤‡æ³¨ä¿¡æ�¯ã€‚å�¦åˆ™å°†ç»™å‡º400é”™è¯¯ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/remark/update friendships/remark/update}
 	 * 
 	 * @access public
-	 * @param int $uid 需要修改备注信息的用户ID。
-	 * @param string $remark 备注信息。
+	 * @param int $uid éœ€è¦�ä¿®æ”¹å¤‡æ³¨ä¿¡æ�¯çš„ç”¨æˆ·IDã€‚
+	 * @param string $remark å¤‡æ³¨ä¿¡æ�¯ã€‚
 	 * @return array
 	 */
 	function update_remark( $uid, $remark )
@@ -1959,16 +1959,16 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取当前用户最新私信列表
+	 * èŽ·å�–å½“å‰�ç”¨æˆ·æœ€æ–°ç§�ä¿¡åˆ—è¡¨
 	 *
-	 * 返回用户的最新n条私信，并包含发送者和接受者的详细资料。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/direct_messages direct_messages}
+	 * è¿”å›žç”¨æˆ·çš„æœ€æ–°næ�¡ç§�ä¿¡ï¼Œå¹¶åŒ…å�«å�‘é€�è€…å’ŒæŽ¥å�—è€…çš„è¯¦ç»†èµ„æ–™ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages direct_messages}
 	 * 
 	 * @access public
-	 * @param int $page 页码
-	 * @param int $count 每次返回的最大记录数，最多返回200条，默认50。
-	 * @param int64 $since_id 返回ID比数值since_id大（比since_id时间晚的）的私信。可选。
-	 * @param int64 $max_id 返回ID不大于max_id(时间不晚于max_id)的私信。可选。
+	 * @param int $page é¡µç �
+	 * @param int $count æ¯�æ¬¡è¿”å›žçš„æœ€å¤§è®°å½•æ•°ï¼Œæœ€å¤šè¿”å›ž200æ�¡ï¼Œé»˜è®¤50ã€‚
+	 * @param int64 $since_id è¿”å›žIDæ¯”æ•°å€¼since_idå¤§ï¼ˆæ¯”since_idæ—¶é—´æ™šçš„ï¼‰çš„ç§�ä¿¡ã€‚å�¯é€‰ã€‚
+	 * @param int64 $max_id è¿”å›žIDä¸�å¤§äºŽmax_id(æ—¶é—´ä¸�æ™šäºŽmax_id)çš„ç§�ä¿¡ã€‚å�¯é€‰ã€‚
 	 * @return array
 	 */
 	function list_dm( $page = 1, $count = 50, $since_id = 0, $max_id = 0 )
@@ -1987,16 +1987,16 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取当前用户发送的最新私信列表
+	 * èŽ·å�–å½“å‰�ç”¨æˆ·å�‘é€�çš„æœ€æ–°ç§�ä¿¡åˆ—è¡¨
 	 *
-	 * 返回登录用户已发送最新50条私信。包括发送者和接受者的详细资料。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/direct_messages/sent direct_messages/sent}
+	 * è¿”å›žç™»å½•ç”¨æˆ·å·²å�‘é€�æœ€æ–°50æ�¡ç§�ä¿¡ã€‚åŒ…æ‹¬å�‘é€�è€…å’ŒæŽ¥å�—è€…çš„è¯¦ç»†èµ„æ–™ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages/sent direct_messages/sent}
 	 * 
 	 * @access public
-	 * @param int $page 页码
-	 * @param int $count 每次返回的最大记录数，最多返回200条，默认50。
-	 * @param int64 $since_id 返回ID比数值since_id大（比since_id时间晚的）的私信。可选。
-	 * @param int64 $max_id 返回ID不大于max_id(时间不晚于max_id)的私信。可选。
+	 * @param int $page é¡µç �
+	 * @param int $count æ¯�æ¬¡è¿”å›žçš„æœ€å¤§è®°å½•æ•°ï¼Œæœ€å¤šè¿”å›ž200æ�¡ï¼Œé»˜è®¤50ã€‚
+	 * @param int64 $since_id è¿”å›žIDæ¯”æ•°å€¼since_idå¤§ï¼ˆæ¯”since_idæ—¶é—´æ™šçš„ï¼‰çš„ç§�ä¿¡ã€‚å�¯é€‰ã€‚
+	 * @param int64 $max_id è¿”å›žIDä¸�å¤§äºŽmax_id(æ—¶é—´ä¸�æ™šäºŽmax_id)çš„ç§�ä¿¡ã€‚å�¯é€‰ã€‚
 	 * @return array
 	 */
 	function list_dm_sent( $page = 1, $count = 50, $since_id = 0, $max_id = 0 )
@@ -2016,12 +2016,12 @@ class SaeTClientV2
 
 
 	/**
-	 * 获取与当前登录用户有私信往来的用户列表，与该用户往来的最新私信
+	 * èŽ·å�–ä¸Žå½“å‰�ç™»å½•ç”¨æˆ·æœ‰ç§�ä¿¡å¾€æ�¥çš„ç”¨æˆ·åˆ—è¡¨ï¼Œä¸Žè¯¥ç”¨æˆ·å¾€æ�¥çš„æœ€æ–°ç§�ä¿¡
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/direct_messages/user_list direct_messages/user_list}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages/user_list direct_messages/user_list}
 	 *
-	 * @param int $count  单页返回的记录条数，默认为20。
-	 * @param int $cursor 返回结果的游标，下一页用返回值里的next_cursor，上一页用previous_cursor，默认为0。
+	 * @param int $count  å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º20ã€‚
+	 * @param int $cursor è¿”å›žç»“æžœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›žå€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function dm_user_list( $count = 20, $cursor = 0)
@@ -2033,15 +2033,15 @@ class SaeTClientV2
 	} 
 
 	/**
-	 * 获取与指定用户的往来私信列表
+	 * èŽ·å�–ä¸ŽæŒ‡å®šç”¨æˆ·çš„å¾€æ�¥ç§�ä¿¡åˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/direct_messages/conversation direct_messages/conversation}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages/conversation direct_messages/conversation}
 	 *
-	 * @param int $uid 需要查询的用户的UID。
-	 * @param int $since_id 若指定此参数，则返回ID比since_id大的私信（即比since_id时间晚的私信），默认为0。
-	 * @param int $max_id  若指定此参数，则返回ID小于或等于max_id的私信，默认为0。
-	 * @param int $count 单页返回的记录条数，默认为50。
-	 * @param int $page  返回结果的页码，默认为1。
+	 * @param int $uid éœ€è¦�æŸ¥è¯¢çš„ç”¨æˆ·çš„UIDã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDæ¯”since_idå¤§çš„ç§�ä¿¡ï¼ˆå�³æ¯”since_idæ—¶é—´æ™šçš„ç§�ä¿¡ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $max_id  è‹¥æŒ‡å®šæ­¤å�‚æ•°ï¼Œåˆ™è¿”å›žIDå°�äºŽæˆ–ç­‰äºŽmax_idçš„ç§�ä¿¡ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page  è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚
 	 * @return array
 	 */
 	function dm_conversation( $uid, $page = 1, $count = 50, $since_id = 0, $max_id = 0)
@@ -2063,11 +2063,11 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 根据私信ID批量获取私信内容
+	 * æ ¹æ�®ç§�ä¿¡IDæ‰¹é‡�èŽ·å�–ç§�ä¿¡å†…å®¹
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/direct_messages/show_batch direct_messages/show_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages/show_batch direct_messages/show_batch}
 	 *
-	 * @param string  $dmids 需要查询的私信ID，用半角逗号分隔，一次最多50个
+	 * @param string  $dmids éœ€è¦�æŸ¥è¯¢çš„ç§�ä¿¡IDï¼Œç”¨å�Šè§’é€—å�·åˆ†éš”ï¼Œä¸€æ¬¡æœ€å¤š50ä¸ª
 	 * @return array
 	 */
 	function dm_show_batch( $dmids )
@@ -2085,15 +2085,15 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 发送私信
+	 * å�‘é€�ç§�ä¿¡
 	 *
-	 * 发送一条私信。成功将返回完整的发送消息。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/direct_messages/new direct_messages/new}
+	 * å�‘é€�ä¸€æ�¡ç§�ä¿¡ã€‚æˆ�åŠŸå°†è¿”å›žå®Œæ•´çš„å�‘é€�æ¶ˆæ�¯ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages/new direct_messages/new}
 	 * 
 	 * @access public
-	 * @param int $uid 用户UID
-	 * @param string $text 要发生的消息内容，文本大小必须小于300个汉字。
-	 * @param int $id 需要发送的微博ID。
+	 * @param int $uid ç”¨æˆ·UID
+	 * @param string $text è¦�å�‘ç”Ÿçš„æ¶ˆæ�¯å†…å®¹ï¼Œæ–‡æœ¬å¤§å°�å¿…é¡»å°�äºŽ300ä¸ªæ±‰å­—ã€‚
+	 * @param int $id éœ€è¦�å�‘é€�çš„å¾®å�šIDã€‚
 	 * @return array
 	 */
 	function send_dm_by_id( $uid, $text, $id = NULL )
@@ -2110,15 +2110,15 @@ class SaeTClientV2
 	}
 	
 	/**
-	 * 发送私信
+	 * å�‘é€�ç§�ä¿¡
 	 *
-	 * 发送一条私信。成功将返回完整的发送消息。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/direct_messages/new direct_messages/new}
+	 * å�‘é€�ä¸€æ�¡ç§�ä¿¡ã€‚æˆ�åŠŸå°†è¿”å›žå®Œæ•´çš„å�‘é€�æ¶ˆæ�¯ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages/new direct_messages/new}
 	 * 
 	 * @access public
-	 * @param string $screen_name 用户昵称
-	 * @param string $text 要发生的消息内容，文本大小必须小于300个汉字。
-	 * @param int $id 需要发送的微博ID。
+	 * @param string $screen_name ç”¨æˆ·æ˜µç§°
+	 * @param string $text è¦�å�‘ç”Ÿçš„æ¶ˆæ�¯å†…å®¹ï¼Œæ–‡æœ¬å¤§å°�å¿…é¡»å°�äºŽ300ä¸ªæ±‰å­—ã€‚
+	 * @param int $id éœ€è¦�å�‘é€�çš„å¾®å�šIDã€‚
 	 * @return array
 	 */
 	function send_dm_by_name( $screen_name, $text, $id = NULL )
@@ -2134,13 +2134,13 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 删除一条私信
+	 * åˆ é™¤ä¸€æ�¡ç§�ä¿¡
 	 *
-	 * 按ID删除私信。操作用户必须为私信的接收人。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/direct_messages/destroy direct_messages/destroy}
+	 * æŒ‰IDåˆ é™¤ç§�ä¿¡ã€‚æ“�ä½œç”¨æˆ·å¿…é¡»ä¸ºç§�ä¿¡çš„æŽ¥æ”¶äººã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages/destroy direct_messages/destroy}
 	 * 
 	 * @access public
-	 * @param int $did 要删除的私信主键ID
+	 * @param int $did è¦�åˆ é™¤çš„ç§�ä¿¡ä¸»é”®ID
 	 * @return array
 	 */
 	function delete_dm( $did )
@@ -2152,13 +2152,13 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 批量删除私信
+	 * æ‰¹é‡�åˆ é™¤ç§�ä¿¡
 	 *
-	 * 批量删除当前登录用户的私信。出现异常时，返回400错误。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/direct_messages/destroy_batch direct_messages/destroy_batch}
+	 * æ‰¹é‡�åˆ é™¤å½“å‰�ç™»å½•ç”¨æˆ·çš„ç§�ä¿¡ã€‚å‡ºçŽ°å¼‚å¸¸æ—¶ï¼Œè¿”å›ž400é”™è¯¯ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages/destroy_batch direct_messages/destroy_batch}
 	 * 
 	 * @access public
-	 * @param mixed $dids 欲删除的一组私信ID，用半角逗号隔开，或者由一组评论ID组成的数组。最多20个。例如："4976494627, 4976262053"或array(4976494627,4976262053);
+	 * @param mixed $dids æ¬²åˆ é™¤çš„ä¸€ç»„ç§�ä¿¡IDï¼Œç”¨å�Šè§’é€—å�·éš”å¼€ï¼Œæˆ–è€…ç”±ä¸€ç»„è¯„è®ºIDç»„æˆ�çš„æ•°ç»„ã€‚æœ€å¤š20ä¸ªã€‚ä¾‹å¦‚ï¼š"4976494627, 4976262053"æˆ–array(4976494627,4976262053);
 	 * @return array
 	 */
 	function delete_dms( $dids )
@@ -2179,11 +2179,11 @@ class SaeTClientV2
 
 
 	/**
-	 * 获取用户基本信息
+	 * èŽ·å�–ç”¨æˆ·åŸºæœ¬ä¿¡æ�¯
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/account/profile/basic account/profile/basic}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/basic account/profile/basic}
 	 *
-	 * @param int $uid  需要获取基本信息的用户UID，默认为当前登录用户。
+	 * @param int $uid  éœ€è¦�èŽ·å�–åŸºæœ¬ä¿¡æ�¯çš„ç”¨æˆ·UIDï¼Œé»˜è®¤ä¸ºå½“å‰�ç™»å½•ç”¨æˆ·ã€‚
 	 * @return array
 	 */
 	function account_profile_basic( $uid = NULL  )
@@ -2197,11 +2197,11 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取用户的教育信息
+	 * èŽ·å�–ç”¨æˆ·çš„æ•™è‚²ä¿¡æ�¯
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/account/profile/education account/profile/education}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/education account/profile/education}
 	 *
-	 * @param int $uid  需要获取教育信息的用户UID，默认为当前登录用户。
+	 * @param int $uid  éœ€è¦�èŽ·å�–æ•™è‚²ä¿¡æ�¯çš„ç”¨æˆ·UIDï¼Œé»˜è®¤ä¸ºå½“å‰�ç™»å½•ç”¨æˆ·ã€‚
 	 * @return array
 	 */
 	function account_education( $uid = NULL )
@@ -2215,11 +2215,11 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 批量获取用户的教育信息
+	 * æ‰¹é‡�èŽ·å�–ç”¨æˆ·çš„æ•™è‚²ä¿¡æ�¯
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/account/profile/education_batch account/profile/education_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/education_batch account/profile/education_batch}
 	 *
-	 * @param string $uids 需要获取教育信息的用户UID，用半角逗号分隔，最多不超过20。
+	 * @param string $uids éœ€è¦�èŽ·å�–æ•™è‚²ä¿¡æ�¯çš„ç”¨æˆ·UIDï¼Œç”¨å�Šè§’é€—å�·åˆ†éš”ï¼Œæœ€å¤šä¸�è¶…è¿‡20ã€‚
 	 * @return array
 	 */
 	function account_education_batch( $uids  )
@@ -2239,11 +2239,11 @@ class SaeTClientV2
 
 
 	/**
-	 * 获取用户的职业信息
+	 * èŽ·å�–ç”¨æˆ·çš„è�Œä¸šä¿¡æ�¯
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/account/profile/career account/profile/career}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/career account/profile/career}
 	 *
-	 * @param int $uid  需要获取教育信息的用户UID，默认为当前登录用户。
+	 * @param int $uid  éœ€è¦�èŽ·å�–æ•™è‚²ä¿¡æ�¯çš„ç”¨æˆ·UIDï¼Œé»˜è®¤ä¸ºå½“å‰�ç™»å½•ç”¨æˆ·ã€‚
 	 * @return array
 	 */
 	function account_career( $uid = NULL )
@@ -2257,11 +2257,11 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 批量获取用户的职业信息
+	 * æ‰¹é‡�èŽ·å�–ç”¨æˆ·çš„è�Œä¸šä¿¡æ�¯
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/account/profile/career_batch account/profile/career_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/career_batch account/profile/career_batch}
 	 *
-	 * @param string $uids 需要获取教育信息的用户UID，用半角逗号分隔，最多不超过20。
+	 * @param string $uids éœ€è¦�èŽ·å�–æ•™è‚²ä¿¡æ�¯çš„ç”¨æˆ·UIDï¼Œç”¨å�Šè§’é€—å�·åˆ†éš”ï¼Œæœ€å¤šä¸�è¶…è¿‡20ã€‚
 	 * @return array
 	 */
 	function account_career_batch( $uids )
@@ -2280,9 +2280,9 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取隐私信息设置情况
+	 * èŽ·å�–éš�ç§�ä¿¡æ�¯è®¾ç½®æƒ…å†µ
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/account/get_privacy account/get_privacy}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/get_privacy account/get_privacy}
 	 * 
 	 * @access public
 	 * @return array
@@ -2293,19 +2293,19 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取所有的学校列表
+	 * èŽ·å�–æ‰€æœ‰çš„å­¦æ ¡åˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/account/profile/school_list account/profile/school_list}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/school_list account/profile/school_list}
 	 *
-	 * @param array $query 搜索选项。格式：array('key0'=>'value0', 'key1'=>'value1', ....)。支持的key:
-	 *  - province	int		省份范围，省份ID。
-	 *  - city		int		城市范围，城市ID。
-	 *  - area		int		区域范围，区ID。
-	 *  - type		int		学校类型，1：大学、2：高中、3：中专技校、4：初中、5：小学，默认为1。
-	 *  - capital	string	学校首字母，默认为A。
-	 *  - keyword	string	学校名称关键字。
-	 *  - count		int		返回的记录条数，默认为10。
-	 * 参数keyword与capital二者必选其一，且只能选其一。按首字母capital查询时，必须提供province参数。
+	 * @param array $query æ�œç´¢é€‰é¡¹ã€‚æ ¼å¼�ï¼šarray('key0'=>'value0', 'key1'=>'value1', ....)ã€‚æ”¯æŒ�çš„key:
+	 *  - province	int		çœ�ä»½èŒƒå›´ï¼Œçœ�ä»½IDã€‚
+	 *  - city		int		åŸŽå¸‚èŒƒå›´ï¼ŒåŸŽå¸‚IDã€‚
+	 *  - area		int		åŒºåŸŸèŒƒå›´ï¼ŒåŒºIDã€‚
+	 *  - type		int		å­¦æ ¡ç±»åž‹ï¼Œ1ï¼šå¤§å­¦ã€�2ï¼šé«˜ä¸­ã€�3ï¼šä¸­ä¸“æŠ€æ ¡ã€�4ï¼šåˆ�ä¸­ã€�5ï¼šå°�å­¦ï¼Œé»˜è®¤ä¸º1ã€‚
+	 *  - capital	string	å­¦æ ¡é¦–å­—æ¯�ï¼Œé»˜è®¤ä¸ºAã€‚
+	 *  - keyword	string	å­¦æ ¡å��ç§°å…³é”®å­—ã€‚
+	 *  - count		int		è¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
+	 * å�‚æ•°keywordä¸ŽcapitaläºŒè€…å¿…é€‰å…¶ä¸€ï¼Œä¸”å�ªèƒ½é€‰å…¶ä¸€ã€‚æŒ‰é¦–å­—æ¯�capitalæŸ¥è¯¢æ—¶ï¼Œå¿…é¡»æ��ä¾›provinceå�‚æ•°ã€‚
 	 * @access public
 	 * @return array
 	 */
@@ -2317,9 +2317,9 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取当前登录用户的API访问频率限制情况
+	 * èŽ·å�–å½“å‰�ç™»å½•ç”¨æˆ·çš„APIè®¿é—®é¢‘çŽ‡é™�åˆ¶æƒ…å†µ
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/account/rate_limit_status account/rate_limit_status}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/rate_limit_status account/rate_limit_status}
 	 * 
 	 * @access public
 	 * @return array
@@ -2330,9 +2330,9 @@ class SaeTClientV2
 	}
 
 	/**
-	 * OAuth授权之后，获取授权用户的UID
+	 * OAuthæŽˆæ�ƒä¹‹å�Žï¼ŒèŽ·å�–æŽˆæ�ƒç”¨æˆ·çš„UID
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/account/get_uid account/get_uid}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/get_uid account/get_uid}
 	 * 
 	 * @access public
 	 * @return array
@@ -2344,37 +2344,37 @@ class SaeTClientV2
 
 
 	/**
-	 * 更改用户资料
+	 * æ›´æ”¹ç”¨æˆ·èµ„æ–™
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/account/profile/basic_update account/profile/basic_update}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/basic_update account/profile/basic_update}
 	 * 
 	 * @access public
-	 * @param array $profile 要修改的资料。格式：array('key1'=>'value1', 'key2'=>'value2', .....)。
-	 * 支持修改的项：
-	 *  - screen_name		string	用户昵称，不可为空。
-	 *  - gender	i		string	用户性别，m：男、f：女，不可为空。
-	 *  - real_name			string	用户真实姓名。
-	 *  - real_name_visible	int		真实姓名可见范围，0：自己可见、1：关注人可见、2：所有人可见。
-	 *  - province	true	int		省份代码ID，不可为空。
-	 *  - city	true		int		城市代码ID，不可为空。
-	 *  - birthday			string	用户生日，格式：yyyy-mm-dd。
-	 *  - birthday_visible	int		生日可见范围，0：保密、1：只显示月日、2：只显示星座、3：所有人可见。
-	 *  - qq				string	用户QQ号码。
-	 *  - qq_visible		int		用户QQ可见范围，0：自己可见、1：关注人可见、2：所有人可见。
-	 *  - msn				string	用户MSN。
-	 *  - msn_visible		int		用户MSN可见范围，0：自己可见、1：关注人可见、2：所有人可见。
-	 *  - url				string	用户博客地址。
-	 *  - url_visible		int		用户博客地址可见范围，0：自己可见、1：关注人可见、2：所有人可见。
-	 *  - credentials_type	int		证件类型，1：身份证、2：学生证、3：军官证、4：护照。
-	 *  - credentials_num	string	证件号码。
-	 *  - email				string	用户常用邮箱地址。
-	 *  - email_visible		int		用户常用邮箱地址可见范围，0：自己可见、1：关注人可见、2：所有人可见。
-	 *  - lang				string	语言版本，zh_cn：简体中文、zh_tw：繁体中文。
-	 *  - description		string	用户描述，最长不超过70个汉字。
-	 * 填写birthday参数时，做如下约定：
-	 *  - 只填年份时，采用1986-00-00格式；
-	 *  - 只填月份时，采用0000-08-00格式；
-	 *  - 只填某日时，采用0000-00-28格式。
+	 * @param array $profile è¦�ä¿®æ”¹çš„èµ„æ–™ã€‚æ ¼å¼�ï¼šarray('key1'=>'value1', 'key2'=>'value2', .....)ã€‚
+	 * æ”¯æŒ�ä¿®æ”¹çš„é¡¹ï¼š
+	 *  - screen_name		string	ç”¨æˆ·æ˜µç§°ï¼Œä¸�å�¯ä¸ºç©ºã€‚
+	 *  - gender	i		string	ç”¨æˆ·æ€§åˆ«ï¼Œmï¼šç”·ã€�fï¼šå¥³ï¼Œä¸�å�¯ä¸ºç©ºã€‚
+	 *  - real_name			string	ç”¨æˆ·çœŸå®žå§“å��ã€‚
+	 *  - real_name_visible	int		çœŸå®žå§“å��å�¯è§�èŒƒå›´ï¼Œ0ï¼šè‡ªå·±å�¯è§�ã€�1ï¼šå…³æ³¨äººå�¯è§�ã€�2ï¼šæ‰€æœ‰äººå�¯è§�ã€‚
+	 *  - province	true	int		çœ�ä»½ä»£ç �IDï¼Œä¸�å�¯ä¸ºç©ºã€‚
+	 *  - city	true		int		åŸŽå¸‚ä»£ç �IDï¼Œä¸�å�¯ä¸ºç©ºã€‚
+	 *  - birthday			string	ç”¨æˆ·ç”Ÿæ—¥ï¼Œæ ¼å¼�ï¼šyyyy-mm-ddã€‚
+	 *  - birthday_visible	int		ç”Ÿæ—¥å�¯è§�èŒƒå›´ï¼Œ0ï¼šä¿�å¯†ã€�1ï¼šå�ªæ˜¾ç¤ºæœˆæ—¥ã€�2ï¼šå�ªæ˜¾ç¤ºæ˜Ÿåº§ã€�3ï¼šæ‰€æœ‰äººå�¯è§�ã€‚
+	 *  - qq				string	ç”¨æˆ·QQå�·ç �ã€‚
+	 *  - qq_visible		int		ç”¨æˆ·QQå�¯è§�èŒƒå›´ï¼Œ0ï¼šè‡ªå·±å�¯è§�ã€�1ï¼šå…³æ³¨äººå�¯è§�ã€�2ï¼šæ‰€æœ‰äººå�¯è§�ã€‚
+	 *  - msn				string	ç”¨æˆ·MSNã€‚
+	 *  - msn_visible		int		ç”¨æˆ·MSNå�¯è§�èŒƒå›´ï¼Œ0ï¼šè‡ªå·±å�¯è§�ã€�1ï¼šå…³æ³¨äººå�¯è§�ã€�2ï¼šæ‰€æœ‰äººå�¯è§�ã€‚
+	 *  - url				string	ç”¨æˆ·å�šå®¢åœ°å�€ã€‚
+	 *  - url_visible		int		ç”¨æˆ·å�šå®¢åœ°å�€å�¯è§�èŒƒå›´ï¼Œ0ï¼šè‡ªå·±å�¯è§�ã€�1ï¼šå…³æ³¨äººå�¯è§�ã€�2ï¼šæ‰€æœ‰äººå�¯è§�ã€‚
+	 *  - credentials_type	int		è¯�ä»¶ç±»åž‹ï¼Œ1ï¼šèº«ä»½è¯�ã€�2ï¼šå­¦ç”Ÿè¯�ã€�3ï¼šå†›å®˜è¯�ã€�4ï¼šæŠ¤ç…§ã€‚
+	 *  - credentials_num	string	è¯�ä»¶å�·ç �ã€‚
+	 *  - email				string	ç”¨æˆ·å¸¸ç”¨é‚®ç®±åœ°å�€ã€‚
+	 *  - email_visible		int		ç”¨æˆ·å¸¸ç”¨é‚®ç®±åœ°å�€å�¯è§�èŒƒå›´ï¼Œ0ï¼šè‡ªå·±å�¯è§�ã€�1ï¼šå…³æ³¨äººå�¯è§�ã€�2ï¼šæ‰€æœ‰äººå�¯è§�ã€‚
+	 *  - lang				string	è¯­è¨€ç‰ˆæœ¬ï¼Œzh_cnï¼šç®€ä½“ä¸­æ–‡ã€�zh_twï¼šç¹�ä½“ä¸­æ–‡ã€‚
+	 *  - description		string	ç”¨æˆ·æ��è¿°ï¼Œæœ€é•¿ä¸�è¶…è¿‡70ä¸ªæ±‰å­—ã€‚
+	 * å¡«å†™birthdayå�‚æ•°æ—¶ï¼Œå�šå¦‚ä¸‹çº¦å®šï¼š
+	 *  - å�ªå¡«å¹´ä»½æ—¶ï¼Œé‡‡ç”¨1986-00-00æ ¼å¼�ï¼›
+	 *  - å�ªå¡«æœˆä»½æ—¶ï¼Œé‡‡ç”¨0000-08-00æ ¼å¼�ï¼›
+	 *  - å�ªå¡«æŸ�æ—¥æ—¶ï¼Œé‡‡ç”¨0000-00-28æ ¼å¼�ã€‚
 	 * @return array
 	 */
 	function update_profile( $profile )
@@ -2384,19 +2384,19 @@ class SaeTClientV2
 
 
 	/**
-	 * 设置教育信息
+	 * è®¾ç½®æ•™è‚²ä¿¡æ�¯
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/account/profile/edu_update account/profile/edu_update}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/edu_update account/profile/edu_update}
 	 * 
 	 * @access public
-	 * @param array $edu_update 要修改的学校信息。格式：array('key1'=>'value1', 'key2'=>'value2', .....)。
-	 * 支持设置的项：
-	 *  - type			int		学校类型，1：大学、2：高中、3：中专技校、4：初中、5：小学，默认为1。必填参数
-	 *  - school_id	`	int		学校代码，必填参数
-	 *  - id			string	需要修改的教育信息ID，不传则为新建，传则为更新。
-	 *  - year			int		入学年份，最小为1900，最大不超过当前年份
-	 *  - department	string	院系或者班别。
-	 *  - visible		int		开放等级，0：仅自己可见、1：关注的人可见、2：所有人可见。
+	 * @param array $edu_update è¦�ä¿®æ”¹çš„å­¦æ ¡ä¿¡æ�¯ã€‚æ ¼å¼�ï¼šarray('key1'=>'value1', 'key2'=>'value2', .....)ã€‚
+	 * æ”¯æŒ�è®¾ç½®çš„é¡¹ï¼š
+	 *  - type			int		å­¦æ ¡ç±»åž‹ï¼Œ1ï¼šå¤§å­¦ã€�2ï¼šé«˜ä¸­ã€�3ï¼šä¸­ä¸“æŠ€æ ¡ã€�4ï¼šåˆ�ä¸­ã€�5ï¼šå°�å­¦ï¼Œé»˜è®¤ä¸º1ã€‚å¿…å¡«å�‚æ•°
+	 *  - school_id	`	int		å­¦æ ¡ä»£ç �ï¼Œå¿…å¡«å�‚æ•°
+	 *  - id			string	éœ€è¦�ä¿®æ”¹çš„æ•™è‚²ä¿¡æ�¯IDï¼Œä¸�ä¼ åˆ™ä¸ºæ–°å»ºï¼Œä¼ åˆ™ä¸ºæ›´æ–°ã€‚
+	 *  - year			int		å…¥å­¦å¹´ä»½ï¼Œæœ€å°�ä¸º1900ï¼Œæœ€å¤§ä¸�è¶…è¿‡å½“å‰�å¹´ä»½
+	 *  - department	string	é™¢ç³»æˆ–è€…ç�­åˆ«ã€‚
+	 *  - visible		int		å¼€æ”¾ç­‰çº§ï¼Œ0ï¼šä»…è‡ªå·±å�¯è§�ã€�1ï¼šå…³æ³¨çš„äººå�¯è§�ã€�2ï¼šæ‰€æœ‰äººå�¯è§�ã€‚
 	 * @return array
 	 */
 	function edu_update( $edu_update )
@@ -2405,11 +2405,11 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 根据学校ID删除用户的教育信息
+	 * æ ¹æ�®å­¦æ ¡IDåˆ é™¤ç”¨æˆ·çš„æ•™è‚²ä¿¡æ�¯
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/account/profile/edu_destroy account/profile/edu_destroy}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/edu_destroy account/profile/edu_destroy}
 	 * 
-	 * @param int $id 教育信息里的学校ID。
+	 * @param int $id æ•™è‚²ä¿¡æ�¯é‡Œçš„å­¦æ ¡IDã€‚
 	 * @return array
 	 */
 	function edu_destroy( $id )
@@ -2421,22 +2421,22 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 设置职业信息
+	 * è®¾ç½®è�Œä¸šä¿¡æ�¯
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/account/profile/car_update account/profile/car_update}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/car_update account/profile/car_update}
 	 * 
-	 * @param array $car_update 要修改的职业信息。格式：array('key1'=>'value1', 'key2'=>'value2', .....)。
-	 * 支持设置的项：
-	 *  - id			string	需要更新的职业信息ID。
-	 *  - start			int		进入公司年份，最小为1900，最大为当年年份。
-	 *  - end			int		离开公司年份，至今填0。
-	 *  - department	string	工作部门。
-	 *  - visible		int		可见范围，0：自己可见、1：关注人可见、2：所有人可见。
-	 *  - province		int		省份代码ID，不可为空值。
-	 *  - city			int		城市代码ID，不可为空值。
-	 *  - company		string	公司名称，不可为空值。
-	 * 参数province与city二者必选其一<br />
-	 * 参数id为空，则为新建职业信息，参数company变为必填项，参数id非空，则为更新，参数company可选
+	 * @param array $car_update è¦�ä¿®æ”¹çš„è�Œä¸šä¿¡æ�¯ã€‚æ ¼å¼�ï¼šarray('key1'=>'value1', 'key2'=>'value2', .....)ã€‚
+	 * æ”¯æŒ�è®¾ç½®çš„é¡¹ï¼š
+	 *  - id			string	éœ€è¦�æ›´æ–°çš„è�Œä¸šä¿¡æ�¯IDã€‚
+	 *  - start			int		è¿›å…¥å…¬å�¸å¹´ä»½ï¼Œæœ€å°�ä¸º1900ï¼Œæœ€å¤§ä¸ºå½“å¹´å¹´ä»½ã€‚
+	 *  - end			int		ç¦»å¼€å…¬å�¸å¹´ä»½ï¼Œè‡³ä»Šå¡«0ã€‚
+	 *  - department	string	å·¥ä½œéƒ¨é—¨ã€‚
+	 *  - visible		int		å�¯è§�èŒƒå›´ï¼Œ0ï¼šè‡ªå·±å�¯è§�ã€�1ï¼šå…³æ³¨äººå�¯è§�ã€�2ï¼šæ‰€æœ‰äººå�¯è§�ã€‚
+	 *  - province		int		çœ�ä»½ä»£ç �IDï¼Œä¸�å�¯ä¸ºç©ºå€¼ã€‚
+	 *  - city			int		åŸŽå¸‚ä»£ç �IDï¼Œä¸�å�¯ä¸ºç©ºå€¼ã€‚
+	 *  - company		string	å…¬å�¸å��ç§°ï¼Œä¸�å�¯ä¸ºç©ºå€¼ã€‚
+	 * å�‚æ•°provinceä¸ŽcityäºŒè€…å¿…é€‰å…¶ä¸€<br />
+	 * å�‚æ•°idä¸ºç©ºï¼Œåˆ™ä¸ºæ–°å»ºè�Œä¸šä¿¡æ�¯ï¼Œå�‚æ•°companyå�˜ä¸ºå¿…å¡«é¡¹ï¼Œå�‚æ•°idé�žç©ºï¼Œåˆ™ä¸ºæ›´æ–°ï¼Œå�‚æ•°companyå�¯é€‰
 	 * @return array
 	 */
 	function car_update( $car_update )
@@ -2445,12 +2445,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 根据公司ID删除用户的职业信息
+	 * æ ¹æ�®å…¬å�¸IDåˆ é™¤ç”¨æˆ·çš„è�Œä¸šä¿¡æ�¯
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/account/profile/car_destroy account/profile/car_destroy}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/car_destroy account/profile/car_destroy}
 	 * 
 	 * @access public
-	 * @param int $id  职业信息里的公司ID
+	 * @param int $id  è�Œä¸šä¿¡æ�¯é‡Œçš„å…¬å�¸ID
 	 * @return array
 	 */
 	function car_destroy( $id )
@@ -2462,11 +2462,11 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 更改头像
+	 * æ›´æ”¹å¤´åƒ�
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/account/avatar/upload account/avatar/upload}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/avatar/upload account/avatar/upload}
 	 *
-	 * @param string $image_path 要上传的头像路径, 支持url。[只支持png/jpg/gif三种格式, 增加格式请修改get_image_mime方法] 必须为小于700K的有效的GIF, JPG图片. 如果图片大于500像素将按比例缩放。
+	 * @param string $image_path è¦�ä¸Šä¼ çš„å¤´åƒ�è·¯å¾„, æ”¯æŒ�urlã€‚[å�ªæ”¯æŒ�png/jpg/gifä¸‰ç§�æ ¼å¼�, å¢žåŠ æ ¼å¼�è¯·ä¿®æ”¹get_image_mimeæ–¹æ³•] å¿…é¡»ä¸ºå°�äºŽ700Kçš„æœ‰æ•ˆçš„GIF, JPGå›¾ç‰‡. å¦‚æžœå›¾ç‰‡å¤§äºŽ500åƒ�ç´ å°†æŒ‰æ¯”ä¾‹ç¼©æ”¾ã€‚
 	 * @return array
 	 */
 	function update_profile_image( $image_path )
@@ -2478,19 +2478,19 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 设置隐私信息
+	 * è®¾ç½®éš�ç§�ä¿¡æ�¯
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/account/update_privacy account/update_privacy}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/update_privacy account/update_privacy}
 	 * 
-	 * @param array $privacy_settings 要修改的隐私设置。格式：array('key1'=>'value1', 'key2'=>'value2', .....)。
-	 * 支持设置的项：
-	 *  - comment	int	是否可以评论我的微博，0：所有人、1：关注的人，默认为0。
-	 *  - geo		int	是否开启地理信息，0：不开启、1：开启，默认为1。
-	 *  - message	int	是否可以给我发私信，0：所有人、1：关注的人，默认为0。
-	 *  - realname	int	是否可以通过真名搜索到我，0：不可以、1：可以，默认为0。
-	 *  - badge		int	勋章是否可见，0：不可见、1：可见，默认为1。
-	 *  - mobile	int	是否可以通过手机号码搜索到我，0：不可以、1：可以，默认为0。
-	 * 以上参数全部选填
+	 * @param array $privacy_settings è¦�ä¿®æ”¹çš„éš�ç§�è®¾ç½®ã€‚æ ¼å¼�ï¼šarray('key1'=>'value1', 'key2'=>'value2', .....)ã€‚
+	 * æ”¯æŒ�è®¾ç½®çš„é¡¹ï¼š
+	 *  - comment	int	æ˜¯å�¦å�¯ä»¥è¯„è®ºæˆ‘çš„å¾®å�šï¼Œ0ï¼šæ‰€æœ‰äººã€�1ï¼šå…³æ³¨çš„äººï¼Œé»˜è®¤ä¸º0ã€‚
+	 *  - geo		int	æ˜¯å�¦å¼€å�¯åœ°ç�†ä¿¡æ�¯ï¼Œ0ï¼šä¸�å¼€å�¯ã€�1ï¼šå¼€å�¯ï¼Œé»˜è®¤ä¸º1ã€‚
+	 *  - message	int	æ˜¯å�¦å�¯ä»¥ç»™æˆ‘å�‘ç§�ä¿¡ï¼Œ0ï¼šæ‰€æœ‰äººã€�1ï¼šå…³æ³¨çš„äººï¼Œé»˜è®¤ä¸º0ã€‚
+	 *  - realname	int	æ˜¯å�¦å�¯ä»¥é€šè¿‡çœŸå��æ�œç´¢åˆ°æˆ‘ï¼Œ0ï¼šä¸�å�¯ä»¥ã€�1ï¼šå�¯ä»¥ï¼Œé»˜è®¤ä¸º0ã€‚
+	 *  - badge		int	å‹‹ç« æ˜¯å�¦å�¯è§�ï¼Œ0ï¼šä¸�å�¯è§�ã€�1ï¼šå�¯è§�ï¼Œé»˜è®¤ä¸º1ã€‚
+	 *  - mobile	int	æ˜¯å�¦å�¯ä»¥é€šè¿‡æ‰‹æœºå�·ç �æ�œç´¢åˆ°æˆ‘ï¼Œ0ï¼šä¸�å�¯ä»¥ã€�1ï¼šå�¯ä»¥ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * ä»¥ä¸Šå�‚æ•°å…¨éƒ¨é€‰å¡«
 	 * @return array
 	 */
 	function update_privacy( $privacy_settings )
@@ -2500,14 +2500,14 @@ class SaeTClientV2
 
 
 	/**
-	 * 获取当前用户的收藏列表
+	 * èŽ·å�–å½“å‰�ç”¨æˆ·çš„æ”¶è—�åˆ—è¡¨
 	 *
-	 * 返回用户的发布的最近20条收藏信息，和用户收藏页面返回内容是一致的。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/favorites favorites}
+	 * è¿”å›žç”¨æˆ·çš„å�‘å¸ƒçš„æœ€è¿‘20æ�¡æ”¶è—�ä¿¡æ�¯ï¼Œå’Œç”¨æˆ·æ”¶è—�é¡µé�¢è¿”å›žå†…å®¹æ˜¯ä¸€è‡´çš„ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites favorites}
 	 * 
 	 * @access public
-	 * @param  int $page 返回结果的页码，默认为1。
-	 * @param  int $count 单页返回的记录条数，默认为50。
+	 * @param  int $page è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param  int $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
 	 * @return array
 	 */
 	function get_favorites( $page = 1, $count = 50 )
@@ -2521,13 +2521,13 @@ class SaeTClientV2
 
 
 	/**
-	 * 根据收藏ID获取指定的收藏信息
+	 * æ ¹æ�®æ”¶è—�IDèŽ·å�–æŒ‡å®šçš„æ”¶è—�ä¿¡æ�¯
 	 *
-	 * 根据收藏ID获取指定的收藏信息。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/favorites/show favorites/show}
+	 * æ ¹æ�®æ”¶è—�IDèŽ·å�–æŒ‡å®šçš„æ”¶è—�ä¿¡æ�¯ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/show favorites/show}
 	 * 
 	 * @access public
-	 * @param int $id 需要查询的收藏ID。
+	 * @param int $id éœ€è¦�æŸ¥è¯¢çš„æ”¶è—�IDã€‚
 	 * @return array
 	 */
 	function favorites_show( $id )
@@ -2540,14 +2540,14 @@ class SaeTClientV2
 
 
 	/**
-	 * 根据标签获取当前登录用户该标签下的收藏列表
+	 * æ ¹æ�®æ ‡ç­¾èŽ·å�–å½“å‰�ç™»å½•ç”¨æˆ·è¯¥æ ‡ç­¾ä¸‹çš„æ”¶è—�åˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/favorites/by_tags favorites/by_tags}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/by_tags favorites/by_tags}
 	 *
 	 * 
-	 * @param int $tid  需要查询的标签ID。'
-	 * @param int $count 单页返回的记录条数，默认为50。
-	 * @param int $page 返回结果的页码，默认为1。
+	 * @param int $tid  éœ€è¦�æŸ¥è¯¢çš„æ ‡ç­¾IDã€‚'
+	 * @param int $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚
 	 * @return array
 	 */
 	function favorites_by_tags( $tid, $page = 1, $count = 50)
@@ -2561,13 +2561,13 @@ class SaeTClientV2
 
 
 	/**
-	 * 获取当前登录用户的收藏标签列表
+	 * èŽ·å�–å½“å‰�ç™»å½•ç”¨æˆ·çš„æ”¶è—�æ ‡ç­¾åˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/favorites/tags favorites/tags}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/tags favorites/tags}
 	 * 
 	 * @access public
-	 * @param int $count 单页返回的记录条数，默认为50。
-	 * @param int $page 返回结果的页码，默认为1。
+	 * @param int $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚
 	 * @return array
 	 */
 	function favorites_tags( $page = 1, $count = 50)
@@ -2580,12 +2580,12 @@ class SaeTClientV2
 
 
 	/**
-	 * 收藏一条微博信息
+	 * æ”¶è—�ä¸€æ�¡å¾®å�šä¿¡æ�¯
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/favorites/create favorites/create}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/create favorites/create}
 	 * 
 	 * @access public
-	 * @param int $sid 收藏的微博id
+	 * @param int $sid æ”¶è—�çš„å¾®å�šid
 	 * @return array
 	 */
 	function add_to_favorites( $sid )
@@ -2598,12 +2598,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 删除微博收藏。
+	 * åˆ é™¤å¾®å�šæ”¶è—�ã€‚
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/favorites/destroy favorites/destroy}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/destroy favorites/destroy}
 	 * 
 	 * @access public
-	 * @param int $id 要删除的收藏微博信息ID.
+	 * @param int $id è¦�åˆ é™¤çš„æ”¶è—�å¾®å�šä¿¡æ�¯ID.
 	 * @return array
 	 */
 	function remove_from_favorites( $id )
@@ -2616,13 +2616,13 @@ class SaeTClientV2
 
 
 	/**
-	 * 批量删除微博收藏。
+	 * æ‰¹é‡�åˆ é™¤å¾®å�šæ”¶è—�ã€‚
 	 *
-	 * 批量删除当前登录用户的收藏。出现异常时，返回HTTP400错误。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/favorites/destroy_batch favorites/destroy_batch}
+	 * æ‰¹é‡�åˆ é™¤å½“å‰�ç™»å½•ç”¨æˆ·çš„æ”¶è—�ã€‚å‡ºçŽ°å¼‚å¸¸æ—¶ï¼Œè¿”å›žHTTP400é”™è¯¯ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/destroy_batch favorites/destroy_batch}
 	 * 
 	 * @access public
-	 * @param mixed $fids 欲删除的一组私信ID，用半角逗号隔开，或者由一组评论ID组成的数组。最多20个。例如："231101027525486630,201100826122315375"或array(231101027525486630,201100826122315375);
+	 * @param mixed $fids æ¬²åˆ é™¤çš„ä¸€ç»„ç§�ä¿¡IDï¼Œç”¨å�Šè§’é€—å�·éš”å¼€ï¼Œæˆ–è€…ç”±ä¸€ç»„è¯„è®ºIDç»„æˆ�çš„æ•°ç»„ã€‚æœ€å¤š20ä¸ªã€‚ä¾‹å¦‚ï¼š"231101027525486630,201100826122315375"æˆ–array(231101027525486630,201100826122315375);
 	 * @return array
 	 */
 	function remove_from_favorites_batch( $fids )
@@ -2642,13 +2642,13 @@ class SaeTClientV2
 
 
 	/**
-	 * 更新一条收藏的收藏标签
+	 * æ›´æ–°ä¸€æ�¡æ”¶è—�çš„æ”¶è—�æ ‡ç­¾
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/favorites/tags/update favorites/tags/update}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/tags/update favorites/tags/update}
 	 * 
 	 * @access public
-	 * @param int $id 需要更新的收藏ID。
-	 * @param string $tags 需要更新的标签内容，用半角逗号分隔，最多不超过2条。
+	 * @param int $id éœ€è¦�æ›´æ–°çš„æ”¶è—�IDã€‚
+	 * @param string $tags éœ€è¦�æ›´æ–°çš„æ ‡ç­¾å†…å®¹ï¼Œç”¨å�Šè§’é€—å�·åˆ†éš”ï¼Œæœ€å¤šä¸�è¶…è¿‡2æ�¡ã€‚
 	 * @return array
 	 */
 	function favorites_tags_update( $id,  $tags )
@@ -2667,12 +2667,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 更新当前登录用户所有收藏下的指定标签
+	 * æ›´æ–°å½“å‰�ç™»å½•ç”¨æˆ·æ‰€æœ‰æ”¶è—�ä¸‹çš„æŒ‡å®šæ ‡ç­¾
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/favorites/tags/update_batch favorites/tags/update_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/tags/update_batch favorites/tags/update_batch}
 	 *
-	 * @param int $tid  需要更新的标签ID。必填
-	 * @param string $tag  需要更新的标签内容。必填
+	 * @param int $tid  éœ€è¦�æ›´æ–°çš„æ ‡ç­¾IDã€‚å¿…å¡«
+	 * @param string $tag  éœ€è¦�æ›´æ–°çš„æ ‡ç­¾å†…å®¹ã€‚å¿…å¡«
 	 * @return array
 	 */
 	function favorites_update_batch( $tid, $tag )
@@ -2684,12 +2684,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 删除当前登录用户所有收藏下的指定标签
+	 * åˆ é™¤å½“å‰�ç™»å½•ç”¨æˆ·æ‰€æœ‰æ”¶è—�ä¸‹çš„æŒ‡å®šæ ‡ç­¾
 	 *
-	 * 删除标签后，该用户所有收藏中，添加了该标签的收藏均解除与该标签的关联关系
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/favorites/tags/destroy_batch favorites/tags/destroy_batch}
+	 * åˆ é™¤æ ‡ç­¾å�Žï¼Œè¯¥ç”¨æˆ·æ‰€æœ‰æ”¶è—�ä¸­ï¼Œæ·»åŠ äº†è¯¥æ ‡ç­¾çš„æ”¶è—�å�‡è§£é™¤ä¸Žè¯¥æ ‡ç­¾çš„å…³è�”å…³ç³»
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/tags/destroy_batch favorites/tags/destroy_batch}
 	 *
-	 * @param int $tid  需要更新的标签ID。必填
+	 * @param int $tid  éœ€è¦�æ›´æ–°çš„æ ‡ç­¾IDã€‚å¿…å¡«
 	 * @return array
 	 */
 	function favorites_tags_destroy_batch( $tid )
@@ -2700,13 +2700,13 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取某用户的话题
+	 * èŽ·å�–æŸ�ç”¨æˆ·çš„è¯�é¢˜
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/trends trends}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/trends trends}
 	 * 
-	 * @param int $uid 查询用户的ID。默认为当前用户。可选。
-	 * @param int $page 指定返回结果的页码。可选。
-	 * @param int $count 单页大小。缺省值10。可选。
+	 * @param int $uid æŸ¥è¯¢ç”¨æˆ·çš„IDã€‚é»˜è®¤ä¸ºå½“å‰�ç”¨æˆ·ã€‚å�¯é€‰ã€‚
+	 * @param int $page æŒ‡å®šè¿”å›žç»“æžœçš„é¡µç �ã€‚å�¯é€‰ã€‚
+	 * @param int $count å�•é¡µå¤§å°�ã€‚ç¼ºçœ�å€¼10ã€‚å�¯é€‰ã€‚
 	 * @return array
 	 */
 	function get_trends( $uid = NULL, $page = 1, $count = 10 )
@@ -2726,12 +2726,12 @@ class SaeTClientV2
 
 
 	/**
-	 * 判断当前用户是否关注某话题
+	 * åˆ¤æ–­å½“å‰�ç”¨æˆ·æ˜¯å�¦å…³æ³¨æŸ�è¯�é¢˜
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/trends/is_follow trends/is_follow}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/trends/is_follow trends/is_follow}
 	 * 
 	 * @access public
-	 * @param string $trend_name 话题关键字。
+	 * @param string $trend_name è¯�é¢˜å…³é”®å­—ã€‚
 	 * @return array
 	 */
 	function trends_is_follow( $trend_name )
@@ -2742,11 +2742,11 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 返回最近一小时内的热门话题
+	 * è¿”å›žæœ€è¿‘ä¸€å°�æ—¶å†…çš„çƒ­é—¨è¯�é¢˜
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/trends/hourly trends/hourly}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/trends/hourly trends/hourly}
 	 * 
-	 * @param  int $base_app 是否基于当前应用来获取数据。1表示基于当前应用来获取数据，默认为0。可选。
+	 * @param  int $base_app æ˜¯å�¦åŸºäºŽå½“å‰�åº”ç”¨æ�¥èŽ·å�–æ•°æ�®ã€‚1è¡¨ç¤ºåŸºäºŽå½“å‰�åº”ç”¨æ�¥èŽ·å�–æ•°æ�®ï¼Œé»˜è®¤ä¸º0ã€‚å�¯é€‰ã€‚
 	 * @return array
 	 */
 	function hourly_trends( $base_app = 0 )
@@ -2758,11 +2758,11 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 返回最近一天内的热门话题
+	 * è¿”å›žæœ€è¿‘ä¸€å¤©å†…çš„çƒ­é—¨è¯�é¢˜
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/trends/daily trends/daily}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/trends/daily trends/daily}
 	 * 
-	 * @param int $base_app 是否基于当前应用来获取数据。1表示基于当前应用来获取数据，默认为0。可选。
+	 * @param int $base_app æ˜¯å�¦åŸºäºŽå½“å‰�åº”ç”¨æ�¥èŽ·å�–æ•°æ�®ã€‚1è¡¨ç¤ºåŸºäºŽå½“å‰�åº”ç”¨æ�¥èŽ·å�–æ•°æ�®ï¼Œé»˜è®¤ä¸º0ã€‚å�¯é€‰ã€‚
 	 * @return array
 	 */
 	function daily_trends( $base_app = 0 )
@@ -2774,12 +2774,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 返回最近一周内的热门话题
+	 * è¿”å›žæœ€è¿‘ä¸€å‘¨å†…çš„çƒ­é—¨è¯�é¢˜
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/trends/weekly trends/weekly}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/trends/weekly trends/weekly}
 	 * 
 	 * @access public
-	 * @param int $base_app 是否基于当前应用来获取数据。1表示基于当前应用来获取数据，默认为0。可选。
+	 * @param int $base_app æ˜¯å�¦åŸºäºŽå½“å‰�åº”ç”¨æ�¥èŽ·å�–æ•°æ�®ã€‚1è¡¨ç¤ºåŸºäºŽå½“å‰�åº”ç”¨æ�¥èŽ·å�–æ•°æ�®ï¼Œé»˜è®¤ä¸º0ã€‚å�¯é€‰ã€‚
 	 * @return array
 	 */
 	function weekly_trends( $base_app = 0 )
@@ -2791,12 +2791,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 关注某话题
+	 * å…³æ³¨æŸ�è¯�é¢˜
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/trends/follow trends/follow}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/trends/follow trends/follow}
 	 * 
 	 * @access public
-	 * @param string $trend_name 要关注的话题关键词。
+	 * @param string $trend_name è¦�å…³æ³¨çš„è¯�é¢˜å…³é”®è¯�ã€‚
 	 * @return array
 	 */
 	function follow_trends( $trend_name )
@@ -2807,12 +2807,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 取消对某话题的关注
+	 * å�–æ¶ˆå¯¹æŸ�è¯�é¢˜çš„å…³æ³¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/trends/destroy trends/destroy}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/trends/destroy trends/destroy}
 	 * 
 	 * @access public
-	 * @param int $tid 要取消关注的话题ID。
+	 * @param int $tid è¦�å�–æ¶ˆå…³æ³¨çš„è¯�é¢˜IDã€‚
 	 * @return array
 	 */
 	function unfollow_trends( $tid )
@@ -2826,13 +2826,13 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 返回指定用户的标签列表
+	 * è¿”å›žæŒ‡å®šç”¨æˆ·çš„æ ‡ç­¾åˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/tags tags}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/tags tags}
 	 * 
-	 * @param int $uid 查询用户的ID。默认为当前用户。可选。
-	 * @param int $page 指定返回结果的页码。可选。
-	 * @param int $count 单页大小。缺省值20，最大值200。可选。
+	 * @param int $uid æŸ¥è¯¢ç”¨æˆ·çš„IDã€‚é»˜è®¤ä¸ºå½“å‰�ç”¨æˆ·ã€‚å�¯é€‰ã€‚
+	 * @param int $page æŒ‡å®šè¿”å›žç»“æžœçš„é¡µç �ã€‚å�¯é€‰ã€‚
+	 * @param int $count å�•é¡µå¤§å°�ã€‚ç¼ºçœ�å€¼20ï¼Œæœ€å¤§å€¼200ã€‚å�¯é€‰ã€‚
 	 * @return array
 	 */
 	function get_tags( $uid = NULL, $page = 1, $count = 20 )
@@ -2851,11 +2851,11 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 批量获取用户的标签列表
+	 * æ‰¹é‡�èŽ·å�–ç”¨æˆ·çš„æ ‡ç­¾åˆ—è¡¨
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/tags/tags_batch tags/tags_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/tags/tags_batch tags/tags_batch}
 	 * 
-	 * @param  string $uids 要获取标签的用户ID。最大20，逗号分隔。必填
+	 * @param  string $uids è¦�èŽ·å�–æ ‡ç­¾çš„ç”¨æˆ·IDã€‚æœ€å¤§20ï¼Œé€—å�·åˆ†éš”ã€‚å¿…å¡«
 	 * @return array
 	 */
 	function get_tags_batch( $uids )
@@ -2873,12 +2873,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 返回用户感兴趣的标签
+	 * è¿”å›žç”¨æˆ·æ„Ÿå…´è¶£çš„æ ‡ç­¾
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/tags/suggestions tags/suggestions}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/tags/suggestions tags/suggestions}
 	 * 
 	 * @access public
-	 * @param int $count 单页大小。缺省值10，最大值10。可选。
+	 * @param int $count å�•é¡µå¤§å°�ã€‚ç¼ºçœ�å€¼10ï¼Œæœ€å¤§å€¼10ã€‚å�¯é€‰ã€‚
 	 * @return array
 	 */
 	function get_suggest_tags( $count = 10)
@@ -2889,12 +2889,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 为当前登录用户添加新的用户标签
+	 * ä¸ºå½“å‰�ç™»å½•ç”¨æˆ·æ·»åŠ æ–°çš„ç”¨æˆ·æ ‡ç­¾
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/tags/create tags/create}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/tags/create tags/create}
 	 * 
 	 * @access public
-	 * @param mixed $tags 要创建的一组标签，每个标签的长度不可超过7个汉字，14个半角字符。多个标签之间用逗号间隔，或由多个标签构成的数组。如："abc,drf,efgh,tt"或array("abc", "drf", "efgh", "tt")
+	 * @param mixed $tags è¦�åˆ›å»ºçš„ä¸€ç»„æ ‡ç­¾ï¼Œæ¯�ä¸ªæ ‡ç­¾çš„é•¿åº¦ä¸�å�¯è¶…è¿‡7ä¸ªæ±‰å­—ï¼Œ14ä¸ªå�Šè§’å­—ç¬¦ã€‚å¤šä¸ªæ ‡ç­¾ä¹‹é—´ç”¨é€—å�·é—´éš”ï¼Œæˆ–ç”±å¤šä¸ªæ ‡ç­¾æž„æˆ�çš„æ•°ç»„ã€‚å¦‚ï¼š"abc,drf,efgh,tt"æˆ–array("abc", "drf", "efgh", "tt")
 	 * @return array
 	 */
 	function add_tags( $tags )
@@ -2909,12 +2909,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 删除标签
+	 * åˆ é™¤æ ‡ç­¾
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/tags/destroy tags/destroy}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/tags/destroy tags/destroy}
 	 * 
 	 * @access public
-	 * @param int $tag_id 标签ID，必填参数
+	 * @param int $tag_id æ ‡ç­¾IDï¼Œå¿…å¡«å�‚æ•°
 	 * @return array
 	 */
 	function delete_tag( $tag_id )
@@ -2925,12 +2925,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 批量删除标签
+	 * æ‰¹é‡�åˆ é™¤æ ‡ç­¾
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/tags/destroy_batch tags/destroy_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/tags/destroy_batch tags/destroy_batch}
 	 * 
 	 * @access public
-	 * @param mixed $ids 必选参数，要删除的tag id，多个id用半角逗号分割，最多10个。或由多个tag id构成的数组。如：“553,554,555"或array(553, 554, 555)
+	 * @param mixed $ids å¿…é€‰å�‚æ•°ï¼Œè¦�åˆ é™¤çš„tag idï¼Œå¤šä¸ªidç”¨å�Šè§’é€—å�·åˆ†å‰²ï¼Œæœ€å¤š10ä¸ªã€‚æˆ–ç”±å¤šä¸ªtag idæž„æˆ�çš„æ•°ç»„ã€‚å¦‚ï¼šâ€œ553,554,555"æˆ–array(553, 554, 555)
 	 * @return array
 	 */
 	function delete_tags( $ids )
@@ -2946,11 +2946,11 @@ class SaeTClientV2
 
 
 	/**
-	 * 验证昵称是否可用，并给予建议昵称
+	 * éªŒè¯�æ˜µç§°æ˜¯å�¦å�¯ç”¨ï¼Œå¹¶ç»™äºˆå»ºè®®æ˜µç§°
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/register/verify_nickname register/verify_nickname}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/register/verify_nickname register/verify_nickname}
 	 *
-	 * @param string $nickname 需要验证的昵称。4-20个字符，支持中英文、数字、"_"或减号。必填
+	 * @param string $nickname éœ€è¦�éªŒè¯�çš„æ˜µç§°ã€‚4-20ä¸ªå­—ç¬¦ï¼Œæ”¯æŒ�ä¸­è‹±æ–‡ã€�æ•°å­—ã€�"_"æˆ–å‡�å�·ã€‚å¿…å¡«
 	 * @return array
 	 */
 	function verify_nickname( $nickname )
@@ -2963,12 +2963,12 @@ class SaeTClientV2
 
 
 	/**
-	 * 搜索用户时的联想搜索建议
+	 * æ�œç´¢ç”¨æˆ·æ—¶çš„è�”æƒ³æ�œç´¢å»ºè®®
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/search/suggestions/users search/suggestions/users}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/search/suggestions/users search/suggestions/users}
 	 *
-	 * @param string $q 搜索的关键字，必须做URLencoding。必填,中间最好不要出现空格
-	 * @param int $count 返回的记录条数，默认为10。
+	 * @param string $q æ�œç´¢çš„å…³é”®å­—ï¼Œå¿…é¡»å�šURLencodingã€‚å¿…å¡«,ä¸­é—´æœ€å¥½ä¸�è¦�å‡ºçŽ°ç©ºæ ¼
+	 * @param int $count è¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
 	 * @return array
 	 */
 	function search_users( $q,  $count = 10 )
@@ -2981,12 +2981,12 @@ class SaeTClientV2
 
 
 	/**
-	 * 搜索微博时的联想搜索建议
+	 * æ�œç´¢å¾®å�šæ—¶çš„è�”æƒ³æ�œç´¢å»ºè®®
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/search/suggestions/statuses search/suggestions/statuses}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/search/suggestions/statuses search/suggestions/statuses}
 	 *
-	 * @param string $q 搜索的关键字，必须做URLencoding。必填
-	 * @param int $count 返回的记录条数，默认为10。
+	 * @param string $q æ�œç´¢çš„å…³é”®å­—ï¼Œå¿…é¡»å�šURLencodingã€‚å¿…å¡«
+	 * @param int $count è¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
 	 * @return array
 	 */
 	function search_statuses( $q,  $count = 10)
@@ -2999,13 +2999,13 @@ class SaeTClientV2
 
 
 	/**
-	 * 搜索学校时的联想搜索建议
+	 * æ�œç´¢å­¦æ ¡æ—¶çš„è�”æƒ³æ�œç´¢å»ºè®®
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/search/suggestions/schools search/suggestions/schools}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/search/suggestions/schools search/suggestions/schools}
 	 *
-	 * @param string $q 搜索的关键字，必须做URLencoding。必填
-	 * @param int $count 返回的记录条数，默认为10。
-	 * @param int type 学校类型，0：全部、1：大学、2：高中、3：中专技校、4：初中、5：小学，默认为0。选填
+	 * @param string $q æ�œç´¢çš„å…³é”®å­—ï¼Œå¿…é¡»å�šURLencodingã€‚å¿…å¡«
+	 * @param int $count è¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
+	 * @param int type å­¦æ ¡ç±»åž‹ï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šå¤§å­¦ã€�2ï¼šé«˜ä¸­ã€�3ï¼šä¸­ä¸“æŠ€æ ¡ã€�4ï¼šåˆ�ä¸­ã€�5ï¼šå°�å­¦ï¼Œé»˜è®¤ä¸º0ã€‚é€‰å¡«
 	 * @return array
 	 */
 	function search_schools( $q,  $count = 10,  $type = 1)
@@ -3018,12 +3018,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 搜索公司时的联想搜索建议
+	 * æ�œç´¢å…¬å�¸æ—¶çš„è�”æƒ³æ�œç´¢å»ºè®®
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/search/suggestions/companies search/suggestions/companies}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/search/suggestions/companies search/suggestions/companies}
 	 *
-	 * @param string $q 搜索的关键字，必须做URLencoding。必填
-	 * @param int $count 返回的记录条数，默认为10。
+	 * @param string $q æ�œç´¢çš„å…³é”®å­—ï¼Œå¿…é¡»å�šURLencodingã€‚å¿…å¡«
+	 * @param int $count è¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
 	 * @return array
 	 */
 	function search_companies( $q, $count = 10)
@@ -3036,14 +3036,14 @@ class SaeTClientV2
 
 
 	/**
-	 * ＠用户时的联想建议
+	 * ï¼ ç”¨æˆ·æ—¶çš„è�”æƒ³å»ºè®®
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/search/suggestions/at_users search/suggestions/at_users}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/search/suggestions/at_users search/suggestions/at_users}
 	 *
-	 * @param string $q 搜索的关键字，必须做URLencoding。必填
-	 * @param int $count 返回的记录条数，默认为10。
-	 * @param int $type 联想类型，0：关注、1：粉丝。必填
-	 * @param int $range 联想范围，0：只联想关注人、1：只联想关注人的备注、2：全部，默认为2。选填
+	 * @param string $q æ�œç´¢çš„å…³é”®å­—ï¼Œå¿…é¡»å�šURLencodingã€‚å¿…å¡«
+	 * @param int $count è¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
+	 * @param int $type è�”æƒ³ç±»åž‹ï¼Œ0ï¼šå…³æ³¨ã€�1ï¼šç²‰ä¸�ã€‚å¿…å¡«
+	 * @param int $range è�”æƒ³èŒƒå›´ï¼Œ0ï¼šå�ªè�”æƒ³å…³æ³¨äººã€�1ï¼šå�ªè�”æƒ³å…³æ³¨äººçš„å¤‡æ³¨ã€�2ï¼šå…¨éƒ¨ï¼Œé»˜è®¤ä¸º2ã€‚é€‰å¡«
 	 * @return array
 	 */
 	function search_at_users( $q, $count = 10, $type=0, $range = 2)
@@ -3061,25 +3061,25 @@ class SaeTClientV2
 
 
 	/**
-	 * 搜索与指定的一个或多个条件相匹配的微博
+	 * æ�œç´¢ä¸ŽæŒ‡å®šçš„ä¸€ä¸ªæˆ–å¤šä¸ªæ�¡ä»¶ç›¸åŒ¹é…�çš„å¾®å�š
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/search/statuses search/statuses}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/search/statuses search/statuses}
 	 *
-	 * @param array $query 搜索选项。格式：array('key0'=>'value0', 'key1'=>'value1', ....)。支持的key:
-	 *  - q				string	搜索的关键字，必须进行URLencode。
-	 *  - filter_ori	int		过滤器，是否为原创，0：全部、1：原创、2：转发，默认为0。
-	 *  - filter_pic	int		过滤器。是否包含图片，0：全部、1：包含、2：不包含，默认为0。
-	 *  - fuid			int		搜索的微博作者的用户UID。
-	 *  - province		int		搜索的省份范围，省份ID。
-	 *  - city			int		搜索的城市范围，城市ID。
-	 *  - starttime		int		开始时间，Unix时间戳。
-	 *  - endtime		int		结束时间，Unix时间戳。
-	 *  - count			int		单页返回的记录条数，默认为10。
-	 *  - page			int		返回结果的页码，默认为1。
-	 *  - needcount		boolean	返回结果中是否包含返回记录数，true：返回、false：不返回，默认为false。
-	 *  - base_app		int		是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
-	 * needcount参数不同，会导致相应的返回值结构不同
-	 * 以上参数全部选填
+	 * @param array $query æ�œç´¢é€‰é¡¹ã€‚æ ¼å¼�ï¼šarray('key0'=>'value0', 'key1'=>'value1', ....)ã€‚æ”¯æŒ�çš„key:
+	 *  - q				string	æ�œç´¢çš„å…³é”®å­—ï¼Œå¿…é¡»è¿›è¡ŒURLencodeã€‚
+	 *  - filter_ori	int		è¿‡æ»¤å™¨ï¼Œæ˜¯å�¦ä¸ºåŽŸåˆ›ï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šåŽŸåˆ›ã€�2ï¼šè½¬å�‘ï¼Œé»˜è®¤ä¸º0ã€‚
+	 *  - filter_pic	int		è¿‡æ»¤å™¨ã€‚æ˜¯å�¦åŒ…å�«å›¾ç‰‡ï¼Œ0ï¼šå…¨éƒ¨ã€�1ï¼šåŒ…å�«ã€�2ï¼šä¸�åŒ…å�«ï¼Œé»˜è®¤ä¸º0ã€‚
+	 *  - fuid			int		æ�œç´¢çš„å¾®å�šä½œè€…çš„ç”¨æˆ·UIDã€‚
+	 *  - province		int		æ�œç´¢çš„çœ�ä»½èŒƒå›´ï¼Œçœ�ä»½IDã€‚
+	 *  - city			int		æ�œç´¢çš„åŸŽå¸‚èŒƒå›´ï¼ŒåŸŽå¸‚IDã€‚
+	 *  - starttime		int		å¼€å§‹æ—¶é—´ï¼ŒUnixæ—¶é—´æˆ³ã€‚
+	 *  - endtime		int		ç»“æ�Ÿæ—¶é—´ï¼ŒUnixæ—¶é—´æˆ³ã€‚
+	 *  - count			int		å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
+	 *  - page			int		è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚
+	 *  - needcount		boolean	è¿”å›žç»“æžœä¸­æ˜¯å�¦åŒ…å�«è¿”å›žè®°å½•æ•°ï¼Œtrueï¼šè¿”å›žã€�falseï¼šä¸�è¿”å›žï¼Œé»˜è®¤ä¸ºfalseã€‚
+	 *  - base_app		int		æ˜¯å�¦å�ªèŽ·å�–å½“å‰�åº”ç”¨çš„æ•°æ�®ã€‚0ä¸ºå�¦ï¼ˆæ‰€æœ‰æ•°æ�®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰�åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * needcountå�‚æ•°ä¸�å�Œï¼Œä¼šå¯¼è‡´ç›¸åº”çš„è¿”å›žå€¼ç»“æž„ä¸�å�Œ
+	 * ä»¥ä¸Šå�‚æ•°å…¨éƒ¨é€‰å¡«
 	 * @return array
 	 */
 	function search_statuses_high( $query )
@@ -3090,25 +3090,25 @@ class SaeTClientV2
 
 
 	/**
-	 * 通过关键词搜索用户
+	 * é€šè¿‡å…³é”®è¯�æ�œç´¢ç”¨æˆ·
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/search/users search/users}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/search/users search/users}
 	 *
-	 * @param array $query 搜索选项。格式：array('key0'=>'value0', 'key1'=>'value1', ....)。支持的key:
-	 *  - q			string	搜索的关键字，必须进行URLencode。
-	 *  - snick		int		搜索范围是否包含昵称，0：不包含、1：包含。
-	 *  - sdomain	int		搜索范围是否包含个性域名，0：不包含、1：包含。
-	 *  - sintro	int		搜索范围是否包含简介，0：不包含、1：包含。
-	 *  - stag		int		搜索范围是否包含标签，0：不包含、1：包含。
-	 *  - province	int		搜索的省份范围，省份ID。
-	 *  - city		int		搜索的城市范围，城市ID。
-	 *  - gender	string	搜索的性别范围，m：男、f：女。
-	 *  - comorsch	string	搜索的公司学校名称。
-	 *  - sort		int		排序方式，1：按更新时间、2：按粉丝数，默认为1。
-	 *  - count		int		单页返回的记录条数，默认为10。
-	 *  - page		int		返回结果的页码，默认为1。
-	 *  - base_app	int		是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
-	 * 以上所有参数全部选填
+	 * @param array $query æ�œç´¢é€‰é¡¹ã€‚æ ¼å¼�ï¼šarray('key0'=>'value0', 'key1'=>'value1', ....)ã€‚æ”¯æŒ�çš„key:
+	 *  - q			string	æ�œç´¢çš„å…³é”®å­—ï¼Œå¿…é¡»è¿›è¡ŒURLencodeã€‚
+	 *  - snick		int		æ�œç´¢èŒƒå›´æ˜¯å�¦åŒ…å�«æ˜µç§°ï¼Œ0ï¼šä¸�åŒ…å�«ã€�1ï¼šåŒ…å�«ã€‚
+	 *  - sdomain	int		æ�œç´¢èŒƒå›´æ˜¯å�¦åŒ…å�«ä¸ªæ€§åŸŸå��ï¼Œ0ï¼šä¸�åŒ…å�«ã€�1ï¼šåŒ…å�«ã€‚
+	 *  - sintro	int		æ�œç´¢èŒƒå›´æ˜¯å�¦åŒ…å�«ç®€ä»‹ï¼Œ0ï¼šä¸�åŒ…å�«ã€�1ï¼šåŒ…å�«ã€‚
+	 *  - stag		int		æ�œç´¢èŒƒå›´æ˜¯å�¦åŒ…å�«æ ‡ç­¾ï¼Œ0ï¼šä¸�åŒ…å�«ã€�1ï¼šåŒ…å�«ã€‚
+	 *  - province	int		æ�œç´¢çš„çœ�ä»½èŒƒå›´ï¼Œçœ�ä»½IDã€‚
+	 *  - city		int		æ�œç´¢çš„åŸŽå¸‚èŒƒå›´ï¼ŒåŸŽå¸‚IDã€‚
+	 *  - gender	string	æ�œç´¢çš„æ€§åˆ«èŒƒå›´ï¼Œmï¼šç”·ã€�fï¼šå¥³ã€‚
+	 *  - comorsch	string	æ�œç´¢çš„å…¬å�¸å­¦æ ¡å��ç§°ã€‚
+	 *  - sort		int		æŽ’åº�æ–¹å¼�ï¼Œ1ï¼šæŒ‰æ›´æ–°æ—¶é—´ã€�2ï¼šæŒ‰ç²‰ä¸�æ•°ï¼Œé»˜è®¤ä¸º1ã€‚
+	 *  - count		int		å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
+	 *  - page		int		è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚
+	 *  - base_app	int		æ˜¯å�¦å�ªèŽ·å�–å½“å‰�åº”ç”¨çš„æ•°æ�®ã€‚0ä¸ºå�¦ï¼ˆæ‰€æœ‰æ•°æ�®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰�åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * ä»¥ä¸Šæ‰€æœ‰å�‚æ•°å…¨éƒ¨é€‰å¡«
 	 * @return array
 	 */
 	function search_users_keywords( $query )
@@ -3119,26 +3119,26 @@ class SaeTClientV2
 
 
 	/**
-	 * 获取系统推荐用户
+	 * èŽ·å�–ç³»ç»ŸæŽ¨è��ç”¨æˆ·
 	 *
-	 * 返回系统推荐的用户列表。
-	 * <br />对应API：{@link http://open.weibo.com/wiki/2/suggestions/users/hot suggestions/users/hot}
+	 * è¿”å›žç³»ç»ŸæŽ¨è��çš„ç”¨æˆ·åˆ—è¡¨ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/suggestions/users/hot suggestions/users/hot}
 	 * 
 	 * @access public
-	 * @param string $category 分类，可选参数，返回某一类别的推荐用户，默认为 default。如果不在以下分类中，返回空列表：<br />
-	 *  - default:人气关注
-	 *  - ent:影视名星
-	 *  - hk_famous:港台名人
-	 *  - model:模特
-	 *  - cooking:美食&健康
-	 *  - sport:体育名人
-	 *  - finance:商界名人
-	 *  - tech:IT互联网
-	 *  - singer:歌手
-	 *  - writer：作家
-	 *  - moderator:主持人
-	 *  - medium:媒体总编
-	 *  - stockplayer:炒股高手
+	 * @param string $category åˆ†ç±»ï¼Œå�¯é€‰å�‚æ•°ï¼Œè¿”å›žæŸ�ä¸€ç±»åˆ«çš„æŽ¨è��ç”¨æˆ·ï¼Œé»˜è®¤ä¸º defaultã€‚å¦‚æžœä¸�åœ¨ä»¥ä¸‹åˆ†ç±»ä¸­ï¼Œè¿”å›žç©ºåˆ—è¡¨ï¼š<br />
+	 *  - default:äººæ°”å…³æ³¨
+	 *  - ent:å½±è§†å��æ˜Ÿ
+	 *  - hk_famous:æ¸¯å�°å��äºº
+	 *  - model:æ¨¡ç‰¹
+	 *  - cooking:ç¾Žé£Ÿ&å�¥åº·
+	 *  - sport:ä½“è‚²å��äºº
+	 *  - finance:å•†ç•Œå��äºº
+	 *  - tech:ITäº’è�”ç½‘
+	 *  - singer:æ­Œæ‰‹
+	 *  - writerï¼šä½œå®¶
+	 *  - moderator:ä¸»æŒ�äºº
+	 *  - medium:åª’ä½“æ€»ç¼–
+	 *  - stockplayer:ç‚’è‚¡é«˜æ‰‹
 	 * @return array
 	 */
 	function hot_users( $category = "default" )
@@ -3150,13 +3150,13 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 获取用户可能感兴趣的人
+	 * èŽ·å�–ç”¨æˆ·å�¯èƒ½æ„Ÿå…´è¶£çš„äºº
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/suggestions/users/may_interested suggestions/users/may_interested}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/suggestions/users/may_interested suggestions/users/may_interested}
 	 * 
 	 * @access public
-	 * @param int $page 返回结果的页码，默认为1。
-	 * @param int $count 单页返回的记录条数，默认为10。
+	 * @param int $page è¿”å›žç»“æžœçš„é¡µç �ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $count å�•é¡µè¿”å›žçš„è®°å½•æ�¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
 	 * @return array
 	 * @ignore
 	 */
@@ -3169,13 +3169,13 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 根据一段微博正文推荐相关微博用户。 
+	 * æ ¹æ�®ä¸€æ®µå¾®å�šæ­£æ–‡æŽ¨è��ç›¸å…³å¾®å�šç”¨æˆ·ã€‚ 
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/suggestions/users/by_status suggestions/users/by_status}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/suggestions/users/by_status suggestions/users/by_status}
 	 * 
 	 * @access public
-	 * @param string $content 微博正文内容。
-	 * @param int $num 返回结果数目，默认为10。
+	 * @param string $content å¾®å�šæ­£æ–‡å†…å®¹ã€‚
+	 * @param int $num è¿”å›žç»“æžœæ•°ç›®ï¼Œé»˜è®¤ä¸º10ã€‚
 	 * @return array
 	 */
 	function suggestions_users_by_status( $content, $num = 10 )
@@ -3187,12 +3187,12 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 热门收藏
+	 * çƒ­é—¨æ”¶è—�
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/suggestions/favorites/hot suggestions/favorites/hot}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/suggestions/favorites/hot suggestions/favorites/hot}
 	 *
-	 * @param int $count 每页返回结果数，默认20。选填
-	 * @param int $page 返回页码，默认1。选填
+	 * @param int $count æ¯�é¡µè¿”å›žç»“æžœæ•°ï¼Œé»˜è®¤20ã€‚é€‰å¡«
+	 * @param int $page è¿”å›žé¡µç �ï¼Œé»˜è®¤1ã€‚é€‰å¡«
 	 * @return array
 	 */
 	function hot_favorites( $page = 1, $count = 20 )
@@ -3204,11 +3204,11 @@ class SaeTClientV2
 	}
 
 	/**
-	 * 把某人标识为不感兴趣的人
+	 * æŠŠæŸ�äººæ ‡è¯†ä¸ºä¸�æ„Ÿå…´è¶£çš„äºº
 	 *
-	 * 对应API：{@link http://open.weibo.com/wiki/2/suggestions/users/not_interested suggestions/users/not_interested}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/suggestions/users/not_interested suggestions/users/not_interested}
 	 *
-	 * @param int $uid 不感兴趣的用户的UID。
+	 * @param int $uid ä¸�æ„Ÿå…´è¶£çš„ç”¨æˆ·çš„UIDã€‚
 	 * @return array
 	 */
 	function put_users_not_interested( $uid )
