@@ -3,16 +3,35 @@ session_start ();
 
 include_once ('config.php');
 include_once ('saetv2.ex.class.php');
-
+include_once ('douban/DoubanOAuth.php');
 $o = new SaeTOAuthV2 ( WB_AKEY, WB_SKEY );
 
-$code_url = $o->getAuthorizeURL ( WB_CALLBACK_URL );
+
 if (isset ( $_POST ['submitBtn'] )) {
 	$c = new SaeTClientV2 ( WB_AKEY, WB_SKEY, $_SESSION ['token'] ['access_token'] );
 	$content = htmlentities ( $_POST ['content'] );
 	$ret = $c->update ( $content );
 }
 
+$douban = new DoubanOAuth();
+/* $result = $douban->get('book/search', array(
+		'q' => 'AA创作',
+)); */
+/* $result = $douban->get('note/people_notes/72318148/guesses', array(
+		
+)); */
+/* $result = $douban->post('notes', array(
+		'title' => 'hello',
+		'can_reply' => false,
+		'content' => 'hello a',
+		'privacy' => 'private'
+)); */
+/* $result = $douban->delete('note/329694366', array(
+)); */
+ $result = $douban->get('note/user_created/72318148', array(
+		//'q' => 'AA创作',
+)); 
+var_dump($douban->http_code, $result);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

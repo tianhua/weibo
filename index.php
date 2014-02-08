@@ -3,7 +3,15 @@ session_start();
 
 include_once( 'config.php' );
 include_once( 'saetv2.ex.class.php' );
+include_once('douban/DoubanOAuth.php');
 
+$douban = new DoubanOAuth(array(
+		'key' => DB_KEY,
+		'secret' => DB_SECRET,
+		'redirect_url' => DB_REDIRECT,
+));
+
+$db_url = $douban->getAuthorizeURL(DB_SCOPE, DB_STATE);
 $o = new SaeTOAuthV2( WB_AKEY , WB_SKEY );
 
 $code_url = $o->getAuthorizeURL( WB_CALLBACK_URL );
@@ -19,6 +27,7 @@ $code_url = $o->getAuthorizeURL( WB_CALLBACK_URL );
 
 <body>
 
-    <p><a href="<?=$code_url?>"><img src="weibo_login.png" title="ç‚¹å‡»è¿›å…¥æŽˆæ�ƒé¡µé�¢" alt="ç‚¹å‡»è¿›å…¥æŽˆæ�ƒé¡µé�¢" border="0" /></a></p>
+    <p><a href="<?=$code_url?>"><img src="weibo_login.png"  border="0" /></a></p>
+    <p><a href="<?=$db_url?>">登陆豆瓣</a></p>
 </body>
 </html>
