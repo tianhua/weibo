@@ -4,21 +4,30 @@ session_start ();
 include_once ('config.php');
 include_once ('saetv2.ex.class.php');
 include_once ('douban/DoubanOAuth.php');
+$islocal = true;
 $o = new SaeTOAuthV2 ( WB_AKEY, WB_SKEY );
 
 if (isset ( $_POST ['submitBtn'] )) {
-	var_dump ( $_POST );
 	if (isset($_POST ['sina']) && $_POST ['sina'] == 'on') {
 		$c = new SaeTClientV2 ( WB_AKEY, WB_SKEY, $_SESSION ['token'] ['access_token'] );
 		$content = htmlentities ( $_POST ['content'] );
 		$ret = $c->update ( $content );
 	}
 	if (isset($_POST ['forum']) && $_POST ['forum'] == 'on') {
-	
-		$content = htmlentities ( $_POST ['content'] );
-		$fid = 44;
+		$content =   $_POST ['content'];
+		$subject =   $_POST ['title']  ;
 		//$mysqli = new mysqli('198.46.147.35', 'sa', 'my_password', 'my_db');
-		$mysqli = new mysqli('localhost', 'root', 'goumao', 'oc');
+		
+		if($islocal){
+			$mysqli = new mysqli('localhost', 'root', '', 'testdis');
+			$fid = 36;
+			$pre = 'pre';
+		}
+		else {
+			$mysqli = new mysqli('198.46.147.35', 'root', 'ilovelyf', 'thj');
+			$fid = 44;
+			$pre = 'thj';
+		}
 		/*
 		 * This is the "official" OO way to do it,
 		* BUT $connect_error was broken until PHP 5.2.9 and 5.3.0.
@@ -28,18 +37,99 @@ if (isset ( $_POST ['submitBtn'] )) {
 					. $mysqli->connect_error);
 		}
 		
+		$mysqli->query("SET NAMES 'utf8'"); 
+		$mysqli->query("SET CHARACTER_SET_CLIENT=utf8"); 
+		$mysqli->query("SET CHARACTER_SET_RESULTS=utf8"); 
 		/*
 		 * Use this instead of $connect_error if you need to ensure
 		* compatibility with PHP versions prior to 5.2.9 and 5.3.0.
 		*/
-		if (mysqli_connect_error()) {
+		/*if (mysqli_connect_error()) {
 			die('Connect Error (' . mysqli_connect_errno() . ') '
 					. mysqli_connect_error());
-		}
+		}*/
 		
 		//echo 'Success... ' . $mysqli->host_info . "\n";
-		$query = "insert into oc_banner ( name, status) values ('test', 1 )";
+		
+		$posttableid = 0;
+		$typeid = 0;
+		$readperm = 0;
+		$author = $lastposter = 'admin';
+		$authorid = 1;
+		$dateline = $lastpost = time();
+		$status = 128;
+		$query = "insert into `" . $pre . "_forum_thread` ( 
+		`fid`,
+		`posttableid`, 
+		`typeid`,
+		`readperm`,
+		`author`,
+		`authorid`, 
+		`subject`,
+		`dateline`,
+		`lastpost`,
+		`lastposter`, 
+		`status`
+		) values (
+		$fid,
+		$posttableid, 
+		$typeid,
+		$readperm,
+		'$author',
+		$authorid, 
+		'$subject',
+		$dateline,
+		$lastpost,
+		'$lastposter',
+		$status
+		 )";
+		echo $query . '</br>';
 		$result = $mysqli->query($query);
+		var_dump($result);
+		if($result)
+		{	
+			$tid = $mysqli->insert_id;
+			$first = 1;
+			$useip = $_SERVER['REMOTE_ADDR'];
+			$port = $_SERVER['REMOTE_PORT'];
+			$usesig = 1;
+			$bbcodeoff = $smileyoff = -1;
+			$mysqli->query("insert into " . $pre . "_forum_post_tableid values (Null)"  );
+			$pid = $mysqli->insert_id;
+			$query = "insert into `" . $pre . "_forum_post` ( 
+		`pid`,	
+		`fid`,
+		`tid`,
+		`first`,
+		`useip`,
+		`port`,
+		`usesig`,
+		`author`,
+		`authorid`, 
+		`subject`,
+		`message`,
+		`dateline`,
+		`bbcodeoff`,
+		`smileyoff`
+		) values (
+		$pid,
+		$fid,
+		$tid,
+		$first,
+		'$useip',
+		$port, 
+		$usesig,
+		'$author',
+		$authorid, 
+		'$subject',
+		'$content',
+		$dateline,
+		$bbcodeoff,
+		$smileyoff
+		 )";
+		echo $query . '</br>';
+		$result = $mysqli->query($query);	
+		}
 		$mysqli->close();
 	 var_dump($result);
 	}
